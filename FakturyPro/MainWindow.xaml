@@ -1,0 +1,74 @@
+﻿<Window x:Class="FakturyPro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Szablony="clr-namespace:FakturyPro.Szablony"
+        xmlns:app="clr-namespace:FakturyPro"
+        Title="MainWindow" Height="600" Width="850" Language="pl-PL">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/MainWindowStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="app:AppCommands.Exit" Executed="ExitApplication"/>
+    </Window.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" IsMainMenu="True">
+            <MenuItem Header="_Program">
+                <MenuItem Command="app:AppCommands.Exit" />
+            </MenuItem>
+            <MenuItem Header="_Ustawienia">
+                <MenuItem Header="Dane firmy" Click="ZmienDaneFirmy_Click"/>
+            </MenuItem>
+        </Menu>
+        <TabControl>
+            <!-- Magazyn -->
+            <TabItem> 
+                <TabItem.Header>
+                    <StackPanel>
+                        <Image Source="images/box.png" Width="32" Height="32" Margin="5,5,5,2"
+                        RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased"/>
+                        <TextBlock Text="Magazyn" TextAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Szablony:Magazyn Padding="5" x:Name="MagazynTab"/>
+            </TabItem>
+
+            <!-- Kontrahenci -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Image Source="images/customers.png" Width="32" Height="32" Margin="5,5,5,2"
+                        RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased"/>
+                        <TextBlock Text="Kontrahenci" TextAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Szablony:Kontrahenci Padding="5" x:Name="KontrahenciTab" />
+            </TabItem>
+            
+            <!-- Zamówienia -->
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Image Source="images/order.png" Width="32" Height="32" Margin="5,5,5,2"
+                        RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased"/>
+                        <TextBlock Text="Zamówienia" TextAlignment="Center" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Szablony:Zamowienia Padding="5" x:Name="ZamowieniaTab" /> 
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel>
+                        <Image Source="images/invoice.png" Width="32" Height="32" Margin="5,5,5,2"
+                        RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased"/>
+                        <TextBlock Text="Faktury" TextAlignment="Center" Padding="5,0" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Szablony:Faktury Padding="5" x:Name="FakturyTab" />
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

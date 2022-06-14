@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FakturyPro.AddDocumentWindow" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAQAAAAAAAAAAAAgCCAgIAAAECAAAAAAAAAAA=</HashCode>
+      <FileName>AddDocumentWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.App" Collapsed="true">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.StorageCommands" Collapsed="true">
+    <Position X="10.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAABBAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.ListCommands" Collapsed="true">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAEAAAABAAAAAAAAAACAAAAAgACAAA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.DocumentCommands" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAgQAAAAEAAAAAAAAAAAAAACAAAAAgAAAAAAIA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.AppCommands" Collapsed="true">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAIAAQACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.MainWindow" Collapsed="true">
+    <Position X="12" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.BudowniczyDruk" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAQAAAgAEAAIAABAAAAAAggAAAAAAAIAAQQ=</HashCode>
+      <FileName>Klasy\BudowniczyDruk.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.BudowniczyPDF" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAQAAAAQAEAgAAAAAAAAAAAgAAggIAQAAAAIAAQA=</HashCode>
+      <FileName>Klasy\BudowniczyPDF.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.Dokument" Collapsed="true">
+    <Position X="1.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gCIBAEAgAAAgoJAQAIAABAQAgAAAAAAAAQAEAIBQJAA=</HashCode>
+      <FileName>Klasy\Dokument.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.Faktura" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAgAAQAAAgAAAIKBAAAAoAAQAAAAAABAA=</HashCode>
+      <FileName>Klasy\Faktura.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.Filtrator&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACAABAAAAACAAAAAAAIAAAAAIAAEAIABBAA=</HashCode>
+      <FileName>Klasy\Filtrator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.Kontrahent" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACCAAQAgCAAAAAAAAAgAAAgIAAAoAAABIAI=</HashCode>
+      <FileName>Klasy\Kontrahent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.ListaDokumentow&lt;T&gt;" Collapsed="true">
+    <Position X="6.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\ListaDokumentow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.ListaFaktur" Collapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\ListaFaktur.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.ListaKlientow" Collapsed="true">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\ListaKlientow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.ListaZamowien" Collapsed="true">
+    <Position X="7.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\ListaZamowien.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.LoggerMagazyn" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIAIAAAAAAAABAQAAAABAQAAAAAAAAAAAAAAABQIAA=</HashCode>
+      <FileName>Klasy\LoggerMagazyn.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.PrawdziwyMagazyn" BaseTypeListCollapsed="true">
+    <Position X="13.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIAAAAAAAAAAJAQAAAABAQAAABAAAAAQAAAAABQIAA=</HashCode>
+      <FileName>Klasy\PrawdziwyMagazyn.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.StanDokumentu" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAAAAAAAAAAAAQAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\StanDokumentu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.StanUtworzony" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\StanUtworzony.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.StanWprowadzony" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\StanWprowadzony.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.StanZaksiegowany" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\StanZaksiegowany.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.Towar" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAMAAAACgiQAACIgAAAAAgAAAAiAAAAAgAAAAAAA=</HashCode>
+      <FileName>Klasy\Towar.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.TowarDokument" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQBAAAAAAQAAiIAAAAAIAAAAAgAAAAAgAAAAAAA=</HashCode>
+      <FileName>Klasy\TowarDokument.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FakturyPro.Klasy.TowarMagazyn" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAgAAAAAgAAAAIAA=</HashCode>
+      <FileName>Klasy\TowarMagazyn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Klasy.Zamowienie" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>Klasy\Zamowienie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Konwertery.AmountToBackgroundConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAIAAAAIAA=</HashCode>
+      <FileName>Konwertery\AmountToBackgroundConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Konwertery.ListWidthConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Konwertery\ListWidthConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FakturyPro.Properties.Resources" Collapsed="true">
+    <Position X="15.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Properties.Settings" Collapsed="true">
+    <Position X="17.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Szablony.Faktury" Collapsed="true">
+    <Position X="13.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Szablony\Faktury.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Szablony.Kontrahenci" Collapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Szablony\Kontrahenci.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Szablony.Magazyn" Collapsed="true">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAIABgIDAAATIAACCAAAAAgAAAhAAA=</HashCode>
+      <FileName>Szablony\Magazyn.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FakturyPro.Szablony.Zamowienia" Collapsed="true">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAABgAAAAAAAAAAACAAAAAAAAg=</HashCode>
+      <FileName>Szablony\Zamowienia.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="FakturyPro.Klasy.Budowniczy" Collapsed="true">
+    <Position X="10.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAQAAAgAAAAAAAAAAAAAAggAAAAAAAIAAQA=</HashCode>
+      <FileName>Klasy\Budowniczy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="FakturyPro.Klasy.Magazyn" Collapsed="true">
+    <Position X="12" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Klasy\Magazyn.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
