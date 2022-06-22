@@ -78,8 +78,8 @@
                     <Setter Property="Padding" Value="6,3" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Zapisz do PDF" Command="app:AppCommands.Save" CommandParameter="SavePDF" />
-            <Button Content="Drukuj" Command="app:AppCommands.Save" CommandParameter="SavePrint"/>
+            <!--Button Content="Zapisz do PDF" Command="app:AppCommands.Save" CommandParameter="SavePDF" /-->
+            <!--Button Content="Drukuj" Command="app:AppCommands.Save" CommandParameter="SavePrint"/-->
             <Button Content="Zapisz" IsDefault="True" Command="app:AppCommands.Save" CommandParameter="Save"/>
             <Button Content="Anuluj" IsCancel="True" Command="app:AppCommands.Cancel"/>
         </StackPanel>

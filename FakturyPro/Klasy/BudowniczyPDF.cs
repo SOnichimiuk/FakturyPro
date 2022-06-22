@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using FakturyPro.Data.Dto;
 
 namespace FakturyPro.Klasy
 {
@@ -80,26 +81,25 @@ namespace FakturyPro.Klasy
             mojDok.Add(head);
         }
 
-        public void BudujAdresy(Kontrahent klient, Kontrahent sprzedawca)
+        public void BudujAdresy(ClientDto klient, ClientDto sprzedawca)
         {
-            String klientS = klient.Nazwa + "\n" + klient.Adres + "\n" + klient.Miasto + " " + klient.KodPocztowy +
+            String klientS = klient.Name + "\n" + klient.Adress + "\n" + klient.City + " " + klient.PostalCode +
                  "\nNIP: " + klient.NIP;
-            String sprzedawcaS = sprzedawca.Nazwa + "\n" + sprzedawca.Adres + "\n" + sprzedawca.Miasto + " " + sprzedawca.KodPocztowy +
+            String sprzedawcaS = sprzedawca.Name + "\n" + sprzedawca.Adress + "\n" + sprzedawca.City + " " + sprzedawca.PostalCode +
                  "\nNIP: " + sprzedawca.NIP;
             adresy.AddCell(new Phrase(klientS, new Font(Font.FontFamily.TIMES_ROMAN, 18f, Font.BOLD)));
             adresy.AddCell(new Phrase(sprzedawcaS, new Font(Font.FontFamily.TIMES_ROMAN, 18f, Font.BOLD)));
             mojDok.Add(adresy);
         }
 
-        public void BudujTowar(int lp, TowarDokument t)
+        public void BudujTowar(int lp, ProductDto t)
         {
             towary.AddCell(lp.ToString());
-            towary.AddCell(t.Nazwa);
-            towary.AddCell(t.Jednostka.ToString());
-            towary.AddCell(t.Ilosc.ToString());
-            towary.AddCell(t.CenaNetto.ToString());
-            towary.AddCell(t.Vat.ToString());
-            towary.AddCell(t.WartoscBrutto.ToString());
+            towary.AddCell(t.Name);
+            towary.AddCell(t.Quantity.ToString());
+            towary.AddCell(t.PriceNetto.ToString());
+            towary.AddCell(t.VatRate.ToString());
+            towary.AddCell("TU POLICZ");
         }
 
         public void ZakonczTowary()

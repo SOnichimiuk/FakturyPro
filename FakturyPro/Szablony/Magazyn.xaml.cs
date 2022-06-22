@@ -181,8 +181,8 @@ namespace FakturyPro.Szablony
 
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
-            DocumentDto zam = new DocumentDto();
-            foreach (ProductDto product in wybraneElementy)
+            DocumentDto zm = new DocumentDto();
+            foreach (ProductDto td in wybraneElementy)
             {
                 zam.Products.Add(product);
             }
@@ -199,29 +199,41 @@ namespace FakturyPro.Szablony
                     mainWindow.RefreshOrders();
                 }
 
-                //todo?
-                // switch (win.WybranaAkcja)
-                // {
-                //     case AddDocumentWindow.ChosenAction.SavePDF:
-                //         // Zapis do PDF
-                //         OpenFileDialog myDialog = new OpenFileDialog();
-                //         myDialog.Filter =
-                //             "PDF (*.PDF)|*.PDF" +
-                //             "|All files (*.*)|*.*";
-                //         myDialog.CheckFileExists = false;
-                //         myDialog.Multiselect = false;
-                //         if (myDialog.ShowDialog() == true)
-                //         {
-                //             zm.Buduj(new BudowniczyPDF(myDialog.FileName));
-                //         }
-                //
-                //
-                //         break;
-                //     case AddDocumentWindow.ChosenAction.SavePrint:
-                //         // Drukowanie
-                //         zm.Buduj(new BudowniczyDruk());
-                //         break;
-                // }
+                switch (win.WybranaAkcja)
+                {
+                    case AddDocumentWindow.ChosenAction.SavePDF:
+                        // Zapis do PDF
+                        OpenFileDialog myDialog = new OpenFileDialog();
+                        myDialog.Filter =
+                            "PDF (*.PDF)|*.PDF" +
+                            "|All files (*.*)|*.*";
+                        myDialog.CheckFileExists = false;
+                        myDialog.Multiselect = false;
+                        if (myDialog.ShowDialog() == true)
+                        {
+                            //zm.Buduj(new BudowniczyPDF(myDialog.FileName));
+                        }
+
+
+                        break;
+                    case AddDocumentWindow.ChosenAction.SavePrint:
+                        // Drukowanie
+                        //zm.Buduj(new BudowniczyDruk());
+                        break;
+                }
+            }
+        }
+
+        private void Przyjmij(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (MessageBox.Show("Czy na pewno chcesz przyjąć produkty na stan?",
+                "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                foreach (ProductDto td in wybraneElementy)
+                {
+                    //td.WprowadzNaStan();
+                }
+                wybraneElementy.Clear();
             }
         }
 

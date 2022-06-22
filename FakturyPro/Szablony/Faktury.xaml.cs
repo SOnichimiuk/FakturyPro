@@ -144,7 +144,7 @@ namespace FakturyPro.Szablony
 
         private void Print(object sender, ExecutedRoutedEventArgs e)
         {
-            (InvoicesListBox.SelectedItem as Faktura).Buduj(new BudowniczyDruk());
+            //(InvoicesListBox.SelectedItem as DocumentDto).Buduj(new BudowniczyDruk());
         }
 
         private void SaveAsPDF(object sender, ExecutedRoutedEventArgs e)
@@ -157,7 +157,7 @@ namespace FakturyPro.Szablony
             myDialog.Multiselect = false;
             if (myDialog.ShowDialog() == true)
             {
-                (InvoicesListBox.SelectedItem as Faktura).Buduj(new BudowniczyPDF(myDialog.FileName));
+                //(InvoicesListBox.SelectedItem as DocumentDto).Buduj(new BudowniczyPDF(myDialog.FileName));
             }
         }
 
