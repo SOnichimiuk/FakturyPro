@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FakturyPro.Klasy;
 using System.ComponentModel;
+using FakturyPro.Data.Dto;
 
 namespace FakturyPro
 {
@@ -20,7 +21,7 @@ namespace FakturyPro
     /// </summary>
     public partial class AddDocumentWindow : Window
     {
-        public AddDocumentWindow(Dokument doc)
+        public AddDocumentWindow(DocumentDto doc)
         {
             dokument = doc;
             InitializeComponent();
@@ -42,9 +43,9 @@ namespace FakturyPro
             get { return listaKontrahentow; }
         }
 
-        private Dokument dokument;
+        private DocumentDto dokument;
 
-        public Dokument Dokument
+        public DocumentDto Dokument
         {
             get { return dokument; }
         }
@@ -64,7 +65,7 @@ namespace FakturyPro
                 akcja = ChosenAction.SavePrint;
             }
 
-            dokument.Klient = CustomersListBox.SelectedItem as Kontrahent;
+            //dokument.Klient = CustomersListBox.SelectedItem as Kontrahent;
 
             DialogResult = true;
             Close();

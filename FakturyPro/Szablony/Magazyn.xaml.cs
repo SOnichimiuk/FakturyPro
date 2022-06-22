@@ -29,10 +29,13 @@ namespace FakturyPro.Szablony
     public partial class Magazyn : UserControl
     {
         private IProductsService productsService;
+        private IDocumentsService documentsService;
         private List<ProductDto> magazynTowarow;
         public Magazyn()
         {
             productsService = new ProductsService();
+            documentsService = new DocumentsService();
+            
             magazynTowarow = productsService.GetProducts();
             InitializeComponent();
             SearchBoxName.Focus();
@@ -52,11 +55,9 @@ namespace FakturyPro.Szablony
         {
             Storyboard sb = (Storyboard)FindResource("ArrowStoryboard");
             sb.Begin();
-            double PriceBrutto;
             foreach (ProductDto magazineProduct in StorageListBox.SelectedItems)
             {
                 int vat = (int)magazineProduct.VatRate;
-                PriceBrutto = magazineProduct.Quantity*magazineProduct.PriceNetto*vat / 100;
                 int index = WybraneElementy.IndexOf(magazineProduct);
                 if (index == -1)
                 {
@@ -131,66 +132,19 @@ namespace FakturyPro.Szablony
 
         }
 
-        private void StworzFakture(object sender, ExecutedRoutedEventArgs e)
-        {
-            Faktura fv = new Faktura();
-            foreach (ProductDto td in wybraneElementy)
-            {
-                //fv.Add();
-            }
-            
-            AddDocumentWindow win = new AddDocumentWindow(fv);
-
-            if (win.ShowDialog() == true)
-            {
-                fv = win.Dokument as Faktura;
-                fv.Wprowadz();
-                ListaFaktur.Instance.Add(fv);
-                wybraneElementy.Clear();
-                MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
-                if (mainWindow != null)
-                {
-                    mainWindow.RefreshInvoices();
-                }
-
-                switch (win.WybranaAkcja)
-                {
-                    case AddDocumentWindow.ChosenAction.SavePDF:
-                        // Zapis do PDF
-                        OpenFileDialog myDialog = new OpenFileDialog();
-                        myDialog.Filter =
-                            "PDF (*.PDF)|*.PDF" +
-                            "|All files (*.*)|*.*";
-                        myDialog.CheckFileExists = false;
-                        myDialog.Multiselect = false;
-                        if (myDialog.ShowDialog() == true)
-                        {
-                            fv.Buduj(new BudowniczyPDF(myDialog.FileName));
-                        }
-                        
-
-                        break;
-                    case AddDocumentWindow.ChosenAction.SavePrint:
-                        // Drukowanie
-                        fv.Buduj(new BudowniczyDruk());
-                        break;
-                }
-            }
-        }
-
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
-            Zamowienie zm = new Zamowienie();
-            foreach (ProductDto td in wybraneElementy)
+            DocumentDto zam = new DocumentDto();
+            foreach (ProductDto product in wybraneElementy)
             {
-                //zm.Add(td);
+                zam.Products.Add(product);
             }
 
-            AddDocumentWindow win = new AddDocumentWindow(zm);
+            AddDocumentWindow win = new AddDocumentWindow(zam);
 
             if (win.ShowDialog() == true)
             {
-                ListaZamowien.Instance.Add((Zamowienie)win.Dokument);
+                documentsService.AddDocument(win.Dokument);
                 wybraneElementy.Clear();
                 MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
                 if (mainWindow != null)
@@ -198,41 +152,29 @@ namespace FakturyPro.Szablony
                     mainWindow.RefreshOrders();
                 }
 
-                switch (win.WybranaAkcja)
-                {
-                    case AddDocumentWindow.ChosenAction.SavePDF:
-                        // Zapis do PDF
-                        OpenFileDialog myDialog = new OpenFileDialog();
-                        myDialog.Filter =
-                            "PDF (*.PDF)|*.PDF" +
-                            "|All files (*.*)|*.*";
-                        myDialog.CheckFileExists = false;
-                        myDialog.Multiselect = false;
-                        if (myDialog.ShowDialog() == true)
-                        {
-                            zm.Buduj(new BudowniczyPDF(myDialog.FileName));
-                        }
-
-
-                        break;
-                    case AddDocumentWindow.ChosenAction.SavePrint:
-                        // Drukowanie
-                        zm.Buduj(new BudowniczyDruk());
-                        break;
-                }
-            }
-        }
-
-        private void Przyjmij(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (MessageBox.Show("Czy na pewno chcesz przyjąć produkty na stan?",
-                "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                foreach (ProductDto td in wybraneElementy)
-                {
-                    //td.WprowadzNaStan();
-                }
-                wybraneElementy.Clear();
+                //todo?
+                // switch (win.WybranaAkcja)
+                // {
+                //     case AddDocumentWindow.ChosenAction.SavePDF:
+                //         // Zapis do PDF
+                //         OpenFileDialog myDialog = new OpenFileDialog();
+                //         myDialog.Filter =
+                //             "PDF (*.PDF)|*.PDF" +
+                //             "|All files (*.*)|*.*";
+                //         myDialog.CheckFileExists = false;
+                //         myDialog.Multiselect = false;
+                //         if (myDialog.ShowDialog() == true)
+                //         {
+                //             zm.Buduj(new BudowniczyPDF(myDialog.FileName));
+                //         }
+                //
+                //
+                //         break;
+                //     case AddDocumentWindow.ChosenAction.SavePrint:
+                //         // Drukowanie
+                //         zm.Buduj(new BudowniczyDruk());
+                //         break;
+                // }
             }
         }
 

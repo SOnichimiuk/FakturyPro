@@ -13,7 +13,7 @@ namespace FakturyPro.Data.Models
         public int ClientId { get; set; }
         public Client Client { get; set; }
         public DateTime CreationDate { get; set; }
-        public ICollection<Product> Products{ get; set; }
+        public ICollection<ProductDocument> ProductDocuments { get; set; }
         public DocumentState State { get; set; }
         public DateTime SaleDate { get; set; }
         public DocumentType Type { get; set; }

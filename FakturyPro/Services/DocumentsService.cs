@@ -43,13 +43,13 @@ namespace FakturyPro.Services
                     State = x.State,
                     SaleDate = x.SaleDate,
                     Type = x.Type,
-                    Products = x.Products.Select(p => new ProductDto
+                    Products = x.ProductDocuments.Select(p => new ProductDto
                     {
-                        Id = p.Id,
-                        Name = p.Name,
+                        Id = p.Product.Id,
+                        Name = p.Product.Name,
                         Quantity = p.Quantity,
-                        PriceNetto = p.PriceNetto,
-                        VatRate = p.VatRate
+                        PriceNetto = p.Product.PriceNetto,
+                        VatRate = p.Product.VatRate
                     }).ToList()
                 }).Where(x => x.Type == DocumentType.Order).ToList();
             }
@@ -69,13 +69,13 @@ namespace FakturyPro.Services
                     State = x.State,
                     SaleDate = x.SaleDate,
                     Type = x.Type,
-                    Products = x.Products.Select(p => new ProductDto
+                    Products = x.ProductDocuments.Select(p => new ProductDto
                     {
-                        Id = p.Id,
-                        Name = p.Name,
+                        Id = p.Product.Id,
+                        Name = p.Product.Name,
                         Quantity = p.Quantity,
-                        PriceNetto = p.PriceNetto,
-                        VatRate = p.VatRate
+                        PriceNetto = p.Product.PriceNetto,
+                        VatRate = p.Product.VatRate
                     }).ToList()
                 }).Where(x => x.Type == DocumentType.Invoice).ToList();
             }
@@ -95,9 +95,18 @@ namespace FakturyPro.Services
 
             using (var context = new FakturyDbContext())
             {
+                var selectedProductsIds = document.Products.Select(x => x.Id);
+
+                var productDocuments = document.Products.Select(x => new ProductDocument
+                {
+                    ProductId = x.Id,
+                    Quantity = x.Quantity,
+                }).ToList();
+
+                documentEntity.ProductDocuments = productDocuments;
+                
                 context.Documents.Add(documentEntity);
                 context.SaveChanges();
-                return;
             }
         }
 

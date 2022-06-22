@@ -11,9 +11,7 @@
         <CommandBinding Command="app:StorageCommands.AddToList" Executed="AddToList" CanExecute="AddToListCanExecute" />
         <CommandBinding Command="app:StorageCommands.RemoveFromList" Executed="RemoveFromList" CanExecute="RemoveFromListCanExecute" />
         <CommandBinding Command="app:ListCommands.Remove" Executed="Remove" CanExecute="RemoveCanExecute" />
-        <CommandBinding Command="app:DocumentCommands.Faktura" Executed="StworzFakture" CanExecute="CanCreateDocument" />
         <CommandBinding Command="app:DocumentCommands.Zamowienie" Executed="StworzZamowienie" CanExecute="CanCreateDocument" />
-        <CommandBinding Command="app:DocumentCommands.Przyjecie" Executed="Przyjmij" CanExecute="CanCreateDocument" />
         <CommandBinding Command="app:ListCommands.Add" Executed="Add" />
         <CommandBinding Command="app:ListCommands.Edit" Executed="Edit" CanExecute="RemoveCanExecute"/>
         <CommandBinding Command="app:ListCommands.ClearSearch" Executed="ClearSearch" />
@@ -171,9 +169,7 @@
             
         </ListBox>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
-                <Button Command="app:DocumentCommands.Przyjecie" ToolTip="Przyjmij towar na magazyn">+ Przyjęcie</Button>
                 <Button Margin="10,0,0,0" Command="app:DocumentCommands.Zamowienie" ToolTip="Stwórz zamówienie">+ Zamówienie</Button>
-                <Button Margin="10,0,0,0" Command="app:DocumentCommands.Faktura" ToolTip="Wystaw fakturę">+ Faktura</Button>
         </StackPanel>
     </Grid>
 

@@ -13,6 +13,6 @@ namespace FakturyPro.Data.Models
         public VatRate VatRate { get; set; }
         public double PriceNetto { get; set; }
         public double Quantity { get; set; }
-        public ICollection<Document> Documents { get; set; }
+        public ICollection<ProductDocument> ProductDocuments { get; set; }
     }
 }

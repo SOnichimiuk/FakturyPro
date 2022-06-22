@@ -89,6 +89,7 @@
     <Compile Include="Data\Models\Document.cs" />
     <Compile Include="Data\Models\Client.cs" />
     <Compile Include="Data\Models\Product.cs" />
+    <Compile Include="Data\Models\ProductDocument.cs" />
     <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IDocumentsService.cs" />
     <Compile Include="Interfaces\IProductsService.cs" />
@@ -110,6 +111,14 @@
     <Compile Include="Migrations\202206220610452_type-in-document.cs" />
     <Compile Include="Migrations\202206220610452_type-in-document.designer.cs">
       <DependentUpon>202206220610452_type-in-document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206221123207_ClearTable.cs" />
+    <Compile Include="Migrations\202206221123207_ClearTable.designer.cs">
+      <DependentUpon>202206221123207_ClearTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206221126143_ProductDocumentQuantity.cs" />
+    <Compile Include="Migrations\202206221126143_ProductDocumentQuantity.designer.cs">
+      <DependentUpon>202206221126143_ProductDocumentQuantity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProductWindow.xaml.cs">
@@ -222,6 +231,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206220610452_type-in-document.resx">
       <DependentUpon>202206220610452_type-in-document.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206221123207_ClearTable.resx">
+      <DependentUpon>202206221123207_ClearTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206221126143_ProductDocumentQuantity.resx">
+      <DependentUpon>202206221126143_ProductDocumentQuantity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
