@@ -66,7 +66,7 @@
 
         <!-- ListBox -->
 
-        <ListBox Grid.Row="1" Name="CustomersListBox" ItemsSource="{Binding Path=ListaKontrahentow, ElementName=KontrahenciUserControl}"
+        <ListBox Grid.Row="1" Name="CustomersListBox" ItemsSource="{Binding Path=klienci, ElementName=KontrahenciUserControl}"
             ItemTemplate="{StaticResource CustomerTemplate}" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                 Style="{StaticResource ListBoxWithClearScrollBar}">
             
@@ -77,18 +77,18 @@
             <StackPanel >
                 <Image Source="/images/customer128.png" Width="80" />
 
-                <TextBlock Text="{Binding Path=Nazwa}"  FontSize="16" FontWeight="Bold" Margin="0,10" TextWrapping="Wrap" />
-                <TextBlock Text="{Binding Path=Adres}" />
+                <TextBlock Text="{Binding Path=Name}"  FontSize="16" FontWeight="Bold" Margin="0,10" TextWrapping="Wrap" />
+                <TextBlock Text="{Binding Path=Adress}" />
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=KodPocztowy}" />
-                    <TextBlock Text="{Binding Path=Miasto}" Margin="5,0,0,0"/>
+                    <TextBlock Text="{Binding Path=PostalCode}" />
+                    <TextBlock Text="{Binding Path=City}" Margin="5,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="NIP " />
                     <TextBlock Text="{Binding Path=NIP}" />
                 </StackPanel>
                 <TextBlock Text="Kontakt" Margin="0,10,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF00C1EF" />
-                <TextBlock Text="{Binding Path=Telefon}" />
+                <TextBlock Text="{Binding Path=PhoneNumber}" />
                 <TextBlock Text="{Binding Path=Email}" />
             </StackPanel>
         </Border>

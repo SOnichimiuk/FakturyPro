@@ -47,19 +47,17 @@ namespace FakturyPro.Services
             }
         }
 
-        public void DeleteProduct(ProductDto product)
+        public void DeleteProduct(int id)
         {
-            var productEntity = new Product
-            {
-                Id = product.Id,
-                Name = product.Name,
-                VatRate = product.VatRate,
-                PriceNetto = product.PriceNetto,
-                Quantity = product.Quantity
-            };
-
             using (var context = new FakturyDbContext())
             {
+                var productEntity = context.Products.FirstOrDefault(x => x.Id == id);
+
+                if (productEntity == null)
+                {
+                    throw new ArgumentException($"Nie znaleziono produktu o id {id}");
+                }
+
                 context.Products.Remove(productEntity);
                 context.SaveChanges();
                 return;
@@ -70,10 +68,17 @@ namespace FakturyPro.Services
         {
             using (var context = new FakturyDbContext())
             {
-                context.Products.FirstOrDefault(x => x.Id == product.Id).Name = product.Name;
-                context.Products.FirstOrDefault(x => x.Id == product.Id).VatRate = product.VatRate;
-                context.Products.FirstOrDefault(x => x.Id == product.Id).PriceNetto = product.PriceNetto;
-                context.Products.FirstOrDefault(x => x.Id == product.Id).Quantity = product.Quantity;
+                var productEntity = context.Products.FirstOrDefault(x => x.Id == product.Id);
+
+                if (productEntity == null)
+                {
+                    throw new ArgumentException($"Nie znaleziono dokumentu o id {product.Id}!");
+                }
+
+                productEntity.Name = product.Name;
+                productEntity.VatRate = product.VatRate;
+                productEntity.PriceNetto = product.PriceNetto;
+                productEntity.Quantity = product.Quantity;
                 context.SaveChanges();
                 return;
             }

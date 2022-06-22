@@ -45,7 +45,7 @@ namespace FakturyPro
 
         private void ZmienDaneFirmy_Click(object sender, RoutedEventArgs e)
         {
-            Kontrahent sprzedawca = (Kontrahent)App.Current.Properties["Sprzedawca"];
+            ClientDto sprzedawca = (ClientDto)App.Current.Properties["Sprzedawca"];
             CustomerWindow win = new CustomerWindow(sprzedawca);
             if (win.ShowDialog() == true)
             {

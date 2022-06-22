@@ -10,7 +10,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FakturyPro.Data.Dto;
+using FakturyPro.Data.Models;
 using FakturyPro.Klasy;
+using FakturyPro.Services;
 
 namespace FakturyPro
 {
@@ -19,20 +22,25 @@ namespace FakturyPro
     /// </summary>
     public partial class ProductWindow : Window
     {
-        public ProductWindow(TowarMagazyn edytowany)
+        public ProductWindow(ProductDto edytowany)
         {
-            towar = edytowany == null ? new TowarMagazyn() : new TowarMagazyn(edytowany);
+            towar = edytowany != null ? edytowany : new ProductDto();
 
             this.edytowany = edytowany;
+
+            int vat = (int)edytowany.VatRate;
+            PriceBrutto = edytowany != null ? edytowany.PriceNetto * vat / 100 : 0;
 
             InitializeComponent();
         }
 
-        private TowarMagazyn edytowany;
+        private ProductDto edytowany;
 
-        private TowarMagazyn towar;
+        private ProductDto towar;
 
-        public TowarMagazyn Towar
+        public double PriceBrutto;
+       
+        public ProductDto Towar
         {
             get { return towar; }
         }
@@ -40,22 +48,15 @@ namespace FakturyPro
 
         private void Save(object sender, ExecutedRoutedEventArgs e)
         {
-            if (!IsValid(this))
-            {
-                MessageBox.Show("Formularz zawiera błędy. Popraw je.", "Błędy");
-                return;
-            }
 
             if (edytowany != null)
             {
-                edytowany.Nazwa = towar.Nazwa;
-                edytowany.Ilosc = towar.Ilosc;
-                edytowany.Jednostka = towar.Jednostka;
-                edytowany.CenaNetto = towar.CenaNetto;
-                edytowany.Vat = towar.Vat;
-                towar = edytowany;
+                towar.Name = edytowany.Name;
+                towar.Quantity = edytowany.Quantity;
+                towar.PriceNetto = edytowany.PriceNetto;
+                towar.VatRate = edytowany.VatRate;
             }
-
+           
             DialogResult = true;
             Close();
         }
@@ -66,19 +67,5 @@ namespace FakturyPro
             Close();
         }
 
-        public bool IsValid(DependencyObject parent)
-        {
-            if (Validation.GetHasError(parent))
-                return false;
-
-            // Validate all the bindings on the children
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); ++i)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
-                if (!IsValid(child)) { return false; }
-            }
-
-            return true;
-        }
     }
 }

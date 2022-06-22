@@ -38,16 +38,16 @@
         <Label Target="{Binding ElementName=FStawkaVAT}" Content="Stawka _VAT" Grid.Row="3" />
         <Label Target="{Binding ElementName=FCenaBrutto}" Content="Cena _Brutto" Grid.Row="4" />
 
-        <TextBox Name="FNazwa" Text="{Binding ElementName=Window, Path=Towar.Nazwa, ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" />
-        <TextBox Name="FIlosc" Text="{Binding ElementName=Window, Path=Towar.Ilosc, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" />
-        <TextBox Name="FCenaNetto" Text="{Binding ElementName=Window, Path=Towar.CenaNetto, ValidatesOnDataErrors=True, StringFormat=N2}" Grid.Row="2" Grid.Column="1" />
+        <TextBox Name="FNazwa" Text="{Binding ElementName=Window, Path=Towar.Name, ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" />
+        <TextBox Name="FIlosc" Text="{Binding ElementName=Window, Path=Towar.Quantity, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" />
+        <TextBox Name="FCenaNetto" Text="{Binding ElementName=Window, Path=Towar.PriceNetto, ValidatesOnDataErrors=True, StringFormat=N2}" Grid.Row="2" Grid.Column="1" />
         <ComboBox HorizontalAlignment="Left" Name="FStawkaVAT" MinWidth="50" Grid.Row="3" Grid.Column="1"
-                  SelectedValue="{Binding ElementName=Window, Path=Towar.Vat, Converter={StaticResource VatConverter}}">
+                  SelectedValue="{Binding ElementName=Window, Path=Towar.VatRate, Converter={StaticResource VatConverter}}">
             <ComboBoxItem Content="23" IsSelected="True"/>
             <ComboBoxItem Content="8" />
             <ComboBoxItem Content="5" />
         </ComboBox>
-        <TextBox Name="FCenaBrutto" Text="{Binding ElementName=Window, Path=Towar.CenaBrutto, ValidatesOnDataErrors=True, StringFormat=N2}" Grid.Row="4" Grid.Column="1" />
+        <TextBox Name="FCenaBrutto" Text="{Binding ElementName=Window, Path=PriceBrutto, ValidatesOnDataErrors=True, StringFormat=N2}" Grid.Row="4" Grid.Column="1" />
 
         <StackPanel Grid.ColumnSpan="2" Grid.Row="7" VerticalAlignment="Bottom"
                     HorizontalAlignment="Right" Orientation="Horizontal">

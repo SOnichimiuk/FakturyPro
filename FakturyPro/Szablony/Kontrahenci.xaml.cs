@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FakturyPro.Klasy;
 using System.ComponentModel;
+using FakturyPro.Services;
+using FakturyPro.Data.Dto;
 
 namespace FakturyPro.Szablony
 {
@@ -21,17 +23,14 @@ namespace FakturyPro.Szablony
     /// </summary>
     public partial class Kontrahenci : UserControl
     {
+        private ClientsService clientsService;
+        public List<ClientDto> klienci;
         public Kontrahenci()
         {
+            clientsService = new ClientsService();
+            klienci = clientsService.GetClients();
             InitializeComponent();
             CustomersListBox.SelectedIndex = 0;
-        }
-
-        private ListaKlientow klienci = ListaKlientow.Instance;
-
-        public ListaKlientow ListaKontrahentow
-        {
-            get { return klienci; }
         }
 
         private void Remove(object sender, ExecutedRoutedEventArgs e)
@@ -39,16 +38,19 @@ namespace FakturyPro.Szablony
             if (MessageBox.Show("Czy na pewno chcesz usunąć ten element?", "Czy na pewno?",
                 MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                klienci.Remove(CustomersListBox.SelectedItem as Kontrahent);
+                var klient = CustomersListBox.SelectedItem as ClientDto;
+                clientsService.DeleteClient(klient.Id);
+                klienci.Remove(CustomersListBox.SelectedItem as ClientDto);
                 CustomersListBox.Items.Refresh();
             }
         }
 
         private void Edit(object sender, ExecutedRoutedEventArgs e)
         {
-            CustomerWindow win = new CustomerWindow(CustomersListBox.SelectedItem as Kontrahent);
+            CustomerWindow win = new CustomerWindow(CustomersListBox.SelectedItem as ClientDto);
             if (win.ShowDialog() == true)
             {
+                clientsService.UpdateClient(win.Klient);
                 CustomersListBox.Items.Refresh();
             }
             //klienci.Remove(CustomersListBox.SelectedItem as Kontrahent);
@@ -59,6 +61,7 @@ namespace FakturyPro.Szablony
             CustomerWindow win = new CustomerWindow(null);
             if (win.ShowDialog() == true)
             {
+                clientsService.AddClient(win.Klient);
                 klienci.Add(win.Klient);
                 CustomersListBox.Items.Refresh();
             }
@@ -96,8 +99,8 @@ namespace FakturyPro.Szablony
             {
                 view.Filter = delegate(object item)
                 {
-                    Kontrahent klient = item as Kontrahent;
-                    return (klient.Nazwa.ToLower().Contains(SearchBoxName.Text.ToLower()) && klient.NIP.Contains(SearchBoxNIP.Text));
+                    ClientDto klient = item as ClientDto;
+                    return (klient.Name.ToLower().Contains(SearchBoxName.Text.ToLower()) && klient.NIP.Contains(SearchBoxNIP.Text));
                 };
             }
             CustomersListBox.SelectedIndex = 0;

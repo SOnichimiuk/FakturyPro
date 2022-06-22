@@ -27,30 +27,22 @@ namespace FakturyPro.Szablony
     /// </summary>
     public partial class Magazyn : UserControl
     {
-        private bool hasErrors = false;
         private ProductsService productsService;
-        private List<Product> magazynTowarow;
+        private List<ProductDto> magazynTowarow;
         public Magazyn()
         {
             productsService = new ProductsService();
-            magazynTowarow = productsService.GetProducts().Select(x => new Product
-            {
-                Id = x.Id,
-                Name = x.Name,
-                PriceNetto = x.PriceNetto,
-                Quantity = x.Quantity,
-                VatRate = x.VatRate
-            }).ToList();
+            magazynTowarow = productsService.GetProducts();
             InitializeComponent();
             SearchBoxName.Focus();
     }
 
-        public List<Product> MagazynTowarow => magazynTowarow;
+        public List<ProductDto> MagazynTowarow => magazynTowarow;
         
 
-        private ObservableCollection<Product> wybraneElementy = new ObservableCollection<Product>();
+        private ObservableCollection<ProductDto> wybraneElementy = new ObservableCollection<ProductDto>();
 
-        public ObservableCollection<Product> WybraneElementy
+        public ObservableCollection<ProductDto> WybraneElementy
         {
             get { return wybraneElementy; }
         }
@@ -59,9 +51,11 @@ namespace FakturyPro.Szablony
         {
             Storyboard sb = (Storyboard)FindResource("ArrowStoryboard");
             sb.Begin();
-            foreach (Product magazineProduct in StorageListBox.SelectedItems)
+            double PriceBrutto;
+            foreach (ProductDto magazineProduct in StorageListBox.SelectedItems)
             {
-                
+                int vat = (int)magazineProduct.VatRate;
+                PriceBrutto = magazineProduct.Quantity*magazineProduct.PriceNetto*vat / 100;
                 int index = WybraneElementy.IndexOf(magazineProduct);
                 if (index == -1)
                 {
@@ -81,12 +75,12 @@ namespace FakturyPro.Szablony
             Storyboard sb = (Storyboard)FindResource("ArrowReverseStoryboard");
             sb.Begin();
 
-            List<Product> lista = new List<Product>();
-            foreach (Product product in SelectedProductsListBox.SelectedItems)
+            List<ProductDto> lista = new List<ProductDto>();
+            foreach (ProductDto product in SelectedProductsListBox.SelectedItems)
             {
                 lista.Add(product);
             }
-            foreach (Product product in lista)
+            foreach (ProductDto product in lista)
             {
                 wybraneElementy.Remove(product);
             }
@@ -99,23 +93,15 @@ namespace FakturyPro.Szablony
             if (MessageBox.Show("Czy na pewno chcesz usunąć ten towar?",
                 "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<Product> lista = new List<Product>();
-                foreach (Product product in StorageListBox.SelectedItems)
+                List<ProductDto> lista = new List<ProductDto>();
+                foreach (ProductDto product in StorageListBox.SelectedItems)
                 {
                     lista.Add(product);
                 }
-                foreach (Product product in lista)
+                foreach (ProductDto product in lista)
                 {
                     magazynTowarow.Remove(product);
-                    var productToRemove = new ProductDto
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        VatRate = product.VatRate,
-                        Quantity = product.Quantity,
-                        PriceNetto = product.PriceNetto
-                    };
-                    productsService.DeleteProduct(productToRemove);
+                    productsService.DeleteProduct(product.Id);
                 }
                 StorageListBox.Items.Refresh();
             }
@@ -123,9 +109,10 @@ namespace FakturyPro.Szablony
 
         private void Edit(object sender, ExecutedRoutedEventArgs e)
         {
-            ProductWindow win = new ProductWindow(StorageListBox.SelectedItems[0] as TowarMagazyn);
+            ProductWindow win = new ProductWindow(StorageListBox.SelectedItems[0] as ProductDto);
             if (win.ShowDialog() == true)
             {
+                productsService.UpdateProduct(win.Towar);
                 StorageListBox.Items.Refresh();
             }
                 
@@ -136,7 +123,8 @@ namespace FakturyPro.Szablony
             ProductWindow win = new ProductWindow(null);
             if (win.ShowDialog() == true)
             {
-                //magazynTowarow.Add(win.Towar);
+                productsService.AddProduct(win.Towar);
+                magazynTowarow.Add(win.Towar);
                 StorageListBox.Items.Refresh();
             }
 
@@ -145,7 +133,7 @@ namespace FakturyPro.Szablony
         private void StworzFakture(object sender, ExecutedRoutedEventArgs e)
         {
             Faktura fv = new Faktura();
-            foreach (Product td in wybraneElementy)
+            foreach (ProductDto td in wybraneElementy)
             {
                 //fv.Add();
             }
@@ -192,7 +180,7 @@ namespace FakturyPro.Szablony
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
             Zamowienie zm = new Zamowienie();
-            foreach (Product td in wybraneElementy)
+            foreach (ProductDto td in wybraneElementy)
             {
                 //zm.Add(td);
             }
@@ -239,7 +227,7 @@ namespace FakturyPro.Szablony
             if (MessageBox.Show("Czy na pewno chcesz przyjąć produkty na stan?",
                 "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                foreach (Product td in wybraneElementy)
+                foreach (ProductDto td in wybraneElementy)
                 {
                     //td.WprowadzNaStan();
                 }
@@ -261,8 +249,8 @@ namespace FakturyPro.Szablony
             {
                 view.Filter = delegate(object item)
                 {
-                    TowarMagazyn tm = item as TowarMagazyn;
-                    return (tm.Nazwa.ToLower().Contains(SearchBoxName.Text.ToLower()));
+                    ProductDto tm = item as ProductDto;
+                    return (tm.Name.ToLower().Contains(SearchBoxName.Text.ToLower()));
                 };
             }
             StorageListBox.SelectedIndex = 0;
@@ -316,7 +304,7 @@ namespace FakturyPro.Szablony
         {
             if (e.Action == ValidationErrorEventAction.Added)
             {
-                hasErrors = true;
+                
                 //MessageBox.Show(e.Error.ErrorContent.ToString());
             }
         }
