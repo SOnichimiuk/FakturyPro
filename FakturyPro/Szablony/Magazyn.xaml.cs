@@ -18,6 +18,7 @@ using Microsoft.Win32;
 using System.ComponentModel;
 using FakturyPro.Data.Models;
 using FakturyPro.Services;
+using FakturyPro.Data.Dto;
 
 namespace FakturyPro.Szablony
 {
@@ -60,10 +61,11 @@ namespace FakturyPro.Szablony
             sb.Begin();
             foreach (Product magazineProduct in StorageListBox.SelectedItems)
             {
-                //product = new Product(magazineProduct) { Quantity=1 };
+                
                 int index = WybraneElementy.IndexOf(magazineProduct);
                 if (index == -1)
                 {
+                    magazineProduct.Quantity = 1;
                     WybraneElementy.Add(magazineProduct);
                 }
                 else
@@ -79,14 +81,14 @@ namespace FakturyPro.Szablony
             Storyboard sb = (Storyboard)FindResource("ArrowReverseStoryboard");
             sb.Begin();
 
-            List<TowarDokument> lista = new List<TowarDokument>();
-            foreach (TowarDokument td in SelectedProductsListBox.SelectedItems)
+            List<Product> lista = new List<Product>();
+            foreach (Product product in SelectedProductsListBox.SelectedItems)
             {
-                lista.Add(td);
+                lista.Add(product);
             }
-            foreach (TowarDokument td in lista)
+            foreach (Product product in lista)
             {
-                //wybraneElementy.Remove();
+                wybraneElementy.Remove(product);
             }
 
             //SelectedProductsListBox.SelectedItems.Clear();
@@ -97,15 +99,23 @@ namespace FakturyPro.Szablony
             if (MessageBox.Show("Czy na pewno chcesz usunąć ten towar?",
                 "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                List<TowarMagazyn> lista = new List<TowarMagazyn>();
-                foreach (TowarMagazyn tm in StorageListBox.SelectedItems)
+                List<Product> lista = new List<Product>();
+                foreach (Product product in StorageListBox.SelectedItems)
                 {
-                    lista.Add(tm);
+                    lista.Add(product);
                 }
-                foreach (TowarMagazyn tm in lista)
+                foreach (Product product in lista)
                 {
-                    //magazynTowarow.Remove(tm);
-                   // wybraneElementy.Remove(new TowarDokument(tm));
+                    magazynTowarow.Remove(product);
+                    var productToRemove = new ProductDto
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        VatRate = product.VatRate,
+                        Quantity = product.Quantity,
+                        PriceNetto = product.PriceNetto
+                    };
+                    productsService.DeleteProduct(productToRemove);
                 }
                 StorageListBox.Items.Refresh();
             }
