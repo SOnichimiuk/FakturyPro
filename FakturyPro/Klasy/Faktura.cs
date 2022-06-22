@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public class Faktura : Dokument
     {
         // Stan faktury - zaksiegowana lub nie

@@ -7,15 +7,15 @@ using System.Runtime.Serialization;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public abstract class Dokument : ICollection<TowarDokument>, INotifyPropertyChanged
     {
         private String nrDokumentu;
         private int numerDokumentu;
         protected Kontrahent klient;
-        protected Kontrahent sprzedawca;
         private DateTime dataWystawienia;
         private List<TowarDokument> listaTowarow;
+
+        protected Kontrahent sprzedawca;
 
         public Dokument()
         {

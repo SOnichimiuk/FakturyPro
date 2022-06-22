@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public class Zamowienie : Dokument
     {
         private static int ostatniNumer = 0;

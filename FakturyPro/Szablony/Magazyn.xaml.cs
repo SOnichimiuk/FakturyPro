@@ -16,6 +16,8 @@ using FakturyPro.Klasy;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
 using System.ComponentModel;
+using FakturyPro.Data.Models;
+using FakturyPro.Services;
 
 namespace FakturyPro.Szablony
 {
@@ -25,23 +27,29 @@ namespace FakturyPro.Szablony
     public partial class Magazyn : UserControl
     {
         private bool hasErrors = false;
-        
+        private ProductsService productsService;
+        private List<Product> magazynTowarow;
         public Magazyn()
         {
+            productsService = new ProductsService();
+            magazynTowarow = productsService.GetProducts().Select(x => new Product
+            {
+                Id = x.Id,
+                Name = x.Name,
+                PriceNetto = x.PriceNetto,
+                Quantity = x.Quantity,
+                VatRate = x.VatRate
+            }).ToList();
             InitializeComponent();
             SearchBoxName.Focus();
-        }
+    }
 
-        private FakturyPro.Klasy.Magazyn magazynTowarow = new LoggerMagazyn(FakturyPro.Klasy.PrawdziwyMagazyn.Instance);
+        public List<Product> MagazynTowarow => magazynTowarow;
+        
 
-        public FakturyPro.Klasy.Magazyn MagazynTowarow
-        {
-            get { return magazynTowarow; }
-        }
+        private ObservableCollection<Product> wybraneElementy = new ObservableCollection<Product>();
 
-        private ObservableCollection<TowarDokument> wybraneElementy = new ObservableCollection<TowarDokument>();
-
-        public ObservableCollection<TowarDokument> WybraneElementy
+        public ObservableCollection<Product> WybraneElementy
         {
             get { return wybraneElementy; }
         }
@@ -50,18 +58,17 @@ namespace FakturyPro.Szablony
         {
             Storyboard sb = (Storyboard)FindResource("ArrowStoryboard");
             sb.Begin();
-            TowarDokument td;
-            foreach (TowarMagazyn tm in StorageListBox.SelectedItems)
+            foreach (Product magazineProduct in StorageListBox.SelectedItems)
             {
-                td = new TowarDokument(tm) { Ilosc=1 };
-                int index = WybraneElementy.IndexOf(td);
+                //product = new Product(magazineProduct) { Quantity=1 };
+                int index = WybraneElementy.IndexOf(magazineProduct);
                 if (index == -1)
                 {
-                    WybraneElementy.Add(td);
+                    WybraneElementy.Add(magazineProduct);
                 }
                 else
                 {
-                    WybraneElementy[index].Ilosc++;
+                    WybraneElementy[index].Quantity++;
                 }
             }
             //StorageListBox.SelectedItems.Clear();
@@ -79,7 +86,7 @@ namespace FakturyPro.Szablony
             }
             foreach (TowarDokument td in lista)
             {
-                wybraneElementy.Remove(td);
+                //wybraneElementy.Remove();
             }
 
             //SelectedProductsListBox.SelectedItems.Clear();
@@ -97,8 +104,8 @@ namespace FakturyPro.Szablony
                 }
                 foreach (TowarMagazyn tm in lista)
                 {
-                    magazynTowarow.Remove(tm);
-                    wybraneElementy.Remove(new TowarDokument(tm));
+                    //magazynTowarow.Remove(tm);
+                   // wybraneElementy.Remove(new TowarDokument(tm));
                 }
                 StorageListBox.Items.Refresh();
             }
@@ -119,7 +126,7 @@ namespace FakturyPro.Szablony
             ProductWindow win = new ProductWindow(null);
             if (win.ShowDialog() == true)
             {
-                magazynTowarow.Add(win.Towar);
+                //magazynTowarow.Add(win.Towar);
                 StorageListBox.Items.Refresh();
             }
 
@@ -128,9 +135,9 @@ namespace FakturyPro.Szablony
         private void StworzFakture(object sender, ExecutedRoutedEventArgs e)
         {
             Faktura fv = new Faktura();
-            foreach (TowarDokument td in wybraneElementy)
+            foreach (Product td in wybraneElementy)
             {
-                fv.Add(td);
+                //fv.Add();
             }
             
             AddDocumentWindow win = new AddDocumentWindow(fv);
@@ -175,9 +182,9 @@ namespace FakturyPro.Szablony
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
             Zamowienie zm = new Zamowienie();
-            foreach (TowarDokument td in wybraneElementy)
+            foreach (Product td in wybraneElementy)
             {
-                zm.Add(td);
+                //zm.Add(td);
             }
 
             AddDocumentWindow win = new AddDocumentWindow(zm);
@@ -222,9 +229,9 @@ namespace FakturyPro.Szablony
             if (MessageBox.Show("Czy na pewno chcesz przyjąć produkty na stan?",
                 "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                foreach (TowarDokument td in wybraneElementy)
+                foreach (Product td in wybraneElementy)
                 {
-                    td.WprowadzNaStan();
+                    //td.WprowadzNaStan();
                 }
                 wybraneElementy.Clear();
             }

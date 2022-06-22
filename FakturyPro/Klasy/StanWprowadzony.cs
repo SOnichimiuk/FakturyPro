@@ -5,7 +5,6 @@ using System.Text;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     class StanWprowadzony : StanDokumentu
     {
         public StanWprowadzony(Dokument doc) : base(doc) { }

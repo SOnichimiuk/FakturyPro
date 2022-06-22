@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public class TowarMagazyn : Towar
     {
         private long id;

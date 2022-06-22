@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.Runtime.Serialization;
+using FakturyPro.Data.Models;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public class TowarDokument : Towar, IEquatable<TowarDokument>, IEquatable<TowarMagazyn>, IDataErrorInfo
     {
         private TowarMagazyn towar;
@@ -22,7 +22,7 @@ namespace FakturyPro.Klasy
             CenaNetto = towar.CenaNetto;
         }
 
-        public override String Nazwa
+        public override string Nazwa
         {
             get { return towar.Nazwa; }
             set { throw new NotSupportedException("Nie możesz zmienić nazwy towaru na fakturze"); }

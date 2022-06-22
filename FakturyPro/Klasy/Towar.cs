@@ -6,7 +6,6 @@ using System.ComponentModel;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public abstract class Towar : IDataErrorInfo, INotifyPropertyChanged
     {
         protected double ilosc;

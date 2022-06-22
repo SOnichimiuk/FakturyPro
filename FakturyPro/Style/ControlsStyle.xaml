@@ -127,7 +127,7 @@
                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}},
                 Path=ActualWidth, Converter={StaticResource ListWidthConverter}, ConverterParameter=44}">
             <StackPanel>
-                <TextBlock FontFamily="Calibri" FontSize="15" LineHeight="21" FontWeight="Bold" Text="{Binding Path=Nazwa}"
+                <TextBlock FontFamily="Calibri" FontSize="15" LineHeight="21" FontWeight="Bold" Text="{Binding Path=Name}"
                 HorizontalAlignment="Left" />
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -136,12 +136,11 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Stan: " />
-                        <TextBlock Text="{Binding Path=Ilosc}" Background="{Binding Path=Ilosc, Converter={StaticResource AmountToBackgroundConverter}}" />
-                        <TextBlock Text=" " />
-                        <TextBlock Text="{Binding Path=Jednostka}" />
+                        <TextBlock Text="{Binding Path=Quantity}" Background="{Binding Path=Quantity, Converter={StaticResource AmountToBackgroundConverter}}" />
+                        <TextBlock Text=" szt" />
                     </StackPanel>
                     
-                    <TextBlock Grid.Column="1" Text="{Binding Path=CenaBrutto, StringFormat=N2}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Path=PriceNetto, StringFormat=N2}"/>
                 </Grid>
             </StackPanel>
         </Border>
@@ -152,7 +151,7 @@
                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}},
                 Path=ActualWidth, Converter={StaticResource ListWidthConverter}, ConverterParameter=44}">
             <StackPanel>
-                <TextBlock FontFamily="Calibri" FontSize="15" LineHeight="21" FontWeight="Bold" Text="{Binding Path=Nazwa}"/>
+                <TextBlock FontFamily="Calibri" FontSize="15" LineHeight="21" FontWeight="Bold" Text="{Binding Path=Name}"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -160,13 +159,13 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Ilość:" />
-                        <TextBox Width="30" TextAlignment="Right" Text="{Binding Path=Ilosc, ValidatesOnDataErrors=True}" Margin="6,0"/>
-                        <TextBlock Text="{Binding Path=Jednostka}" />
+                        <TextBox Width="30" TextAlignment="Right" Text="{Binding Path=Quansity, ValidatesOnDataErrors=True}" Margin="6,0"/>
+                        <TextBlock Text="szt" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Grid.Column="1">
                         <TextBlock Text="Cena" />
-                        <TextBox Width="60" TextAlignment="Right" Text="{Binding Path=CenaBrutto, ValidatesOnDataErrors=True, StringFormat=N2}" Margin="6,0" />
+                        <TextBox Width="60" TextAlignment="Right" Text="{Binding Path=BruttoPrice, ValidatesOnDataErrors=True, StringFormat=N2}" Margin="6,0" />
                         <TextBlock Text="zł" />
                     </StackPanel>
                 </Grid>

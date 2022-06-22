@@ -5,7 +5,6 @@ using System.Text;
 
 namespace FakturyPro.Klasy
 {
-    [Serializable]
     public abstract class StanDokumentu 
     {
         protected Dokument dokument;

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -16,6 +17,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -39,11 +42,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp, Version=5.3.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +79,16 @@
     <Compile Include="CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Dto\ClientDto.cs" />
+    <Compile Include="Data\Dto\DocumentDto.cs" />
+    <Compile Include="Data\Dto\ProductDto.cs" />
+    <Compile Include="Data\Enum\DocumentState.cs" />
+    <Compile Include="Data\Enum\DocumentType.cs" />
+    <Compile Include="Data\Enum\VatRate.cs" />
+    <Compile Include="Data\FakturyDbContext.cs" />
+    <Compile Include="Data\Models\Document.cs" />
+    <Compile Include="Data\Models\Client.cs" />
+    <Compile Include="Data\Models\Product.cs" />
     <Compile Include="Klasy\ListaFaktur.cs" />
     <Compile Include="Klasy\ListaKlientow.cs" />
     <Compile Include="Klasy\ListaZamowien.cs" />
@@ -76,9 +96,25 @@
     <Compile Include="Konwertery\DocumentsByMonthsGrouper.cs" />
     <Compile Include="Konwertery\ListWidthConverter.cs" />
     <Compile Include="Konwertery\VatToStringConverter.cs" />
+    <Compile Include="Migrations\202206212103519_Initial_migration.cs" />
+    <Compile Include="Migrations\202206212103519_Initial_migration.designer.cs">
+      <DependentUpon>202206212103519_Initial_migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206212238257_Clean.cs" />
+    <Compile Include="Migrations\202206212238257_Clean.designer.cs">
+      <DependentUpon>202206212238257_Clean.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206220610452_type-in-document.cs" />
+    <Compile Include="Migrations\202206220610452_type-in-document.designer.cs">
+      <DependentUpon>202206220610452_type-in-document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ProductWindow.xaml.cs">
       <DependentUpon>ProductWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ClientsService.cs" />
+    <Compile Include="Services\DocumentsService.cs" />
+    <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Szablony\Faktury.xaml.cs">
       <DependentUpon>Faktury.xaml</DependentUpon>
     </Compile>
@@ -113,7 +149,6 @@
     <Compile Include="Klasy\Dokument.cs" />
     <Compile Include="Klasy\Kontrahent.cs" />
     <Compile Include="Klasy\Faktura.cs" />
-    <Compile Include="Klasy\LoggerMagazyn.cs" />
     <Compile Include="Klasy\Magazyn.cs" />
     <Compile Include="Klasy\PrawdziwyMagazyn.cs" />
     <Compile Include="Klasy\StanDokumentu.cs" />
@@ -176,12 +211,22 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202206212103519_Initial_migration.resx">
+      <DependentUpon>202206212103519_Initial_migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206212238257_Clean.resx">
+      <DependentUpon>202206212238257_Clean.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206220610452_type-in-document.resx">
+      <DependentUpon>202206220610452_type-in-document.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -204,6 +249,14 @@
     <Resource Include="images\customer128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
