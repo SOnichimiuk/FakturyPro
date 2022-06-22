@@ -180,7 +180,7 @@ namespace FakturyPro.Szablony
 
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
-            Zamowienie zm = new Zamowienie();
+            DocumentDto zm = new DocumentDto();
             foreach (ProductDto td in wybraneElementy)
             {
                 //zm.Add(td);
@@ -210,14 +210,14 @@ namespace FakturyPro.Szablony
                         myDialog.Multiselect = false;
                         if (myDialog.ShowDialog() == true)
                         {
-                            zm.Buduj(new BudowniczyPDF(myDialog.FileName));
+                            //zm.Buduj(new BudowniczyPDF(myDialog.FileName));
                         }
 
 
                         break;
                     case AddDocumentWindow.ChosenAction.SavePrint:
                         // Drukowanie
-                        zm.Buduj(new BudowniczyDruk());
+                        //zm.Buduj(new BudowniczyDruk());
                         break;
                 }
             }

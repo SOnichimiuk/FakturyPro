@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows;
 using System.Windows.Markup;
+using FakturyPro.Data.Dto;
 
 namespace FakturyPro.Klasy
 {
@@ -108,11 +109,12 @@ namespace FakturyPro.Klasy
             strona.Margin = new Thickness(96);
         }
 
-        public void BudujAdresy(Kontrahent klient, Kontrahent sprzedawca)
+        public void BudujAdresy(ClientDto klient, ClientDto sprzedawca)
         {
-            String klientS = klient.Nazwa + "\n" + klient.Adres + "\n" + klient.Miasto + " " + klient.KodPocztowy +
+            String klientS = klient.Name + "\n" + klient.Adress + "\n" + klient.City
+                + " " + klient.PostalCode +
                  "\nNIP: " + klient.NIP;
-            String sprzedawcaS = sprzedawca.Nazwa + "\n" + sprzedawca.Adres + "\n" + sprzedawca.Miasto + " " + sprzedawca.KodPocztowy +
+            String sprzedawcaS = sprzedawca.Name + "\n" + sprzedawca.Adress + "\n" + sprzedawca.City + " " + sprzedawca.PostalCode +
                  "\nNIP: " + sprzedawca.NIP;
             //Grid gridAdresy = new Grid();
             ////gridAdresy.HorizontalAlignment = HorizontalAlignment.Left;
@@ -152,7 +154,7 @@ namespace FakturyPro.Klasy
             kli.Margin = new Thickness(15);
             strona.Children.Add(kli);
         }
-        public void BudujTowar(int lp, TowarDokument t)
+        public void BudujTowar(int lp, ProductDto t)
         {
             RowDefinition rowDef1 = new RowDefinition();
             gridTowary.RowDefinitions.Add(rowDef1);
@@ -167,17 +169,15 @@ namespace FakturyPro.Klasy
 
             tb1.Text = lp.ToString();
             tb1.Margin = new Thickness(5);
-            tb2.Text = t.Nazwa;
+            tb2.Text = t.Name;
             tb2.Margin = new Thickness(5);
-            tb3.Text = t.Jednostka.ToString();
-            tb3.Margin = new Thickness(5);
-            tb4.Text = t.Ilosc.ToString();
+            tb4.Text = t.Quantity.ToString();
             tb4.Margin = new Thickness(5);
-            tb5.Text = t.CenaNetto.ToString();
+            tb5.Text = t.PriceNetto.ToString();
             tb5.Margin = new Thickness(5);
-            tb6.Text = t.Vat.ToString();
+            tb6.Text = t.VatRate.ToString();
             tb6.Margin = new Thickness(5);
-            tb7.Text = t.WartoscBrutto.ToString();
+            tb7.Text = "TU POLICZ";
             tb7.Margin = new Thickness(5);
 
             Grid.SetRow(tb1, lp);

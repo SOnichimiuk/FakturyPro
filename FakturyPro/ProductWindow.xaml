@@ -16,7 +16,6 @@
         <Style TargetType="{x:Type Label}">
             <Setter Property="HorizontalAlignment" Value="Right" />
         </Style>
-        <con:VatToStringConverter x:Key="VatConverter" />
     </Window.Resources>
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -42,7 +41,7 @@
         <TextBox Name="FIlosc" Text="{Binding ElementName=Window, Path=Towar.Quantity, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" />
         <TextBox Name="FCenaNetto" Text="{Binding ElementName=Window, Path=Towar.PriceNetto, ValidatesOnDataErrors=True, StringFormat=N2}" Grid.Row="2" Grid.Column="1" />
         <ComboBox HorizontalAlignment="Left" Name="FStawkaVAT" MinWidth="50" Grid.Row="3" Grid.Column="1"
-                  SelectedValue="{Binding ElementName=Window, Path=Towar.VatRate, Converter={StaticResource VatConverter}}">
+                  SelectedValue="{Binding ElementName=Window, Path=Towar.VatRate}">
             <ComboBoxItem Content="23" IsSelected="True"/>
             <ComboBoxItem Content="8" />
             <ComboBoxItem Content="5" />

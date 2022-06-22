@@ -92,13 +92,9 @@
     <Compile Include="Interfaces\IClientService.cs" />
     <Compile Include="Interfaces\IDocumentsService.cs" />
     <Compile Include="Interfaces\IProductsService.cs" />
-    <Compile Include="Klasy\ListaFaktur.cs" />
-    <Compile Include="Klasy\ListaKlientow.cs" />
-    <Compile Include="Klasy\ListaZamowien.cs" />
     <Compile Include="Konwertery\AmountToBackgroundConverter.cs" />
     <Compile Include="Konwertery\DocumentsByMonthsGrouper.cs" />
     <Compile Include="Konwertery\ListWidthConverter.cs" />
-    <Compile Include="Konwertery\VatToStringConverter.cs" />
     <Compile Include="Migrations\202206212103519_Initial_migration.cs" />
     <Compile Include="Migrations\202206212103519_Initial_migration.designer.cs">
       <DependentUpon>202206212103519_Initial_migration.cs</DependentUpon>
@@ -149,20 +145,6 @@
     <Compile Include="Klasy\Budowniczy.cs" />
     <Compile Include="Klasy\BudowniczyDruk.cs" />
     <Compile Include="Klasy\BudowniczyPDF.cs" />
-    <Compile Include="Klasy\Dokument.cs" />
-    <Compile Include="Klasy\Kontrahent.cs" />
-    <Compile Include="Klasy\Faktura.cs" />
-    <Compile Include="Klasy\Magazyn.cs" />
-    <Compile Include="Klasy\PrawdziwyMagazyn.cs" />
-    <Compile Include="Klasy\StanDokumentu.cs" />
-    <Compile Include="Klasy\StanUtworzony.cs" />
-    <Compile Include="Klasy\StanWprowadzony.cs" />
-    <Compile Include="Klasy\StanZaksiegowany.cs" />
-    <Compile Include="Klasy\Towar.cs" />
-    <Compile Include="Klasy\TowarDokument.cs" />
-    <Compile Include="Klasy\TowarMagazyn.cs" />
-    <Compile Include="Klasy\Zamowienie.cs" />
-    <Compile Include="Klasy\ListaDokumentow.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
