@@ -40,12 +40,12 @@
         <Label Target="{Binding ElementName=FTelefon}" Content="_Telefon" Grid.Row="5" />
         <Label Target="{Binding ElementName=FEmail}" Content="_Email" Grid.Row="6" />
 
-        <TextBox Name="FNazwa" Text="{Binding ElementName=Window, Path=Klient.Nazwa, ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" />
-        <TextBox Name="FAdres" Text="{Binding ElementName=Window, Path=Klient.Adres, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" />
-        <TextBox Name="FKodPocztowy" ToolTip="Format XX-XXX" Text="{Binding ElementName=Window, Path=Klient.KodPocztowy, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" />
-        <TextBox Name="FMiasto" Text="{Binding ElementName=Window, Path=Klient.Miasto, ValidatesOnDataErrors=True}" Grid.Row="3" Grid.Column="1" />
+        <TextBox Name="FNazwa" Text="{Binding ElementName=Window, Path=Klient.Name, ValidatesOnDataErrors=True}" Grid.Row="0" Grid.Column="1" />
+        <TextBox Name="FAdres" Text="{Binding ElementName=Window, Path=Klient.Adress, ValidatesOnDataErrors=True}" Grid.Row="1" Grid.Column="1" />
+        <TextBox Name="FKodPocztowy" ToolTip="Format XX-XXX" Text="{Binding ElementName=Window, Path=Klient.PostalCode, ValidatesOnDataErrors=True}" Grid.Row="2" Grid.Column="1" />
+        <TextBox Name="FMiasto" Text="{Binding ElementName=Window, Path=Klient.City, ValidatesOnDataErrors=True}" Grid.Row="3" Grid.Column="1" />
         <TextBox Name="FNIP" ToolTip="Format XXX-XXX-XX-XX" Text="{Binding ElementName=Window, Path=Klient.NIP, ValidatesOnDataErrors=True}" Grid.Row="4" Grid.Column="1" />
-        <TextBox Name="FTelefon" Text="{Binding ElementName=Window, Path=Klient.Telefon, ValidatesOnDataErrors=True}" Grid.Row="5" Grid.Column="1" />
+        <TextBox Name="FTelefon" Text="{Binding ElementName=Window, Path=Klient.PhoneNumber, ValidatesOnDataErrors=True}" Grid.Row="5" Grid.Column="1" />
         <TextBox Name="FEmail" Text="{Binding ElementName=Window, Path=Klient.Email, ValidatesOnDataErrors=True}" Grid.Row="6" Grid.Column="1" />
         
         <StackPanel Grid.ColumnSpan="2" Grid.Row="7" VerticalAlignment="Bottom"

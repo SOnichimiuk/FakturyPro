@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using FakturyPro.Data.Dto;
 using FakturyPro.Klasy;
 
 namespace FakturyPro
@@ -19,18 +20,18 @@ namespace FakturyPro
     /// </summary>
     public partial class CustomerWindow : Window
     {
-        public CustomerWindow(Kontrahent kontrahent)
+        public CustomerWindow(ClientDto kontrahent)
         {
-            klient = new Kontrahent();
+            klient = new ClientDto();
             if (kontrahent != null)
             {
                 edytowany = kontrahent;
-                klient.Nazwa = edytowany.Nazwa;
-                klient.Miasto = edytowany.Miasto;
-                klient.Adres = edytowany.Adres;
-                klient.KodPocztowy = edytowany.KodPocztowy;
+                klient.Name = edytowany.Name;
+                klient.City = edytowany.City;
+                klient.Adress = edytowany.Adress;
+                klient.PostalCode = edytowany.PostalCode;
                 klient.NIP = edytowany.NIP;
-                klient.Telefon = edytowany.Telefon;
+                klient.PhoneNumber = edytowany.PhoneNumber;
                 klient.Email = edytowany.Email;
             }
             
@@ -39,11 +40,11 @@ namespace FakturyPro
             InitializeComponent();
         }
 
-        private Kontrahent edytowany;
+        private ClientDto edytowany;
 
-        private Kontrahent klient;
+        private ClientDto klient;
 
-        public Kontrahent Klient
+        public ClientDto Klient
         {
             get { return klient; }
         }
@@ -58,12 +59,12 @@ namespace FakturyPro
 
             if (edytowany != null)
             {
-                edytowany.Nazwa = klient.Nazwa;
-                edytowany.Miasto = klient.Miasto;
-                edytowany.Adres = klient.Adres;
-                edytowany.KodPocztowy = klient.KodPocztowy;
+                edytowany.Name = klient.Name;
+                edytowany.City = klient.City;
+                edytowany.Adress = klient.Adress;
+                edytowany.PostalCode = klient.PostalCode;
                 edytowany.NIP = klient.NIP;
-                edytowany.Telefon = klient.Telefon;
+                edytowany.PhoneNumber = klient.PhoneNumber;
                 edytowany.Email = klient.Email;
                 klient = edytowany;
             }

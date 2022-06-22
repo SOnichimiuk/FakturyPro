@@ -159,13 +159,13 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Ilość:" />
-                        <TextBox Width="30" TextAlignment="Right" Text="{Binding Path=Quansity, ValidatesOnDataErrors=True}" Margin="6,0"/>
+                        <TextBox Width="30" TextAlignment="Right" Text="{Binding Path=Quantity, ValidatesOnDataErrors=True}" Margin="6,0"/>
                         <TextBlock Text="szt" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Grid.Column="1">
                         <TextBlock Text="Cena" />
-                        <TextBox Width="60" TextAlignment="Right" Text="{Binding Path=BruttoPrice, ValidatesOnDataErrors=True, StringFormat=N2}" Margin="6,0" />
+                        <TextBox Width="60" TextAlignment="Right" Text="{Binding Path=PriceBrutto, ValidatesOnDataErrors=True, StringFormat=N2}" Margin="6,0" />
                         <TextBlock Text="zł" />
                     </StackPanel>
                 </Grid>
@@ -201,7 +201,7 @@
                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}},
                 Path=ActualWidth, Converter={StaticResource ListWidthConverter}, ConverterParameter=44}">
             <StackPanel>
-                <TextBlock FontSize="13" LineHeight="18" FontWeight="Bold" Text="{Binding Path=Nazwa}"
+                <TextBlock FontSize="13" LineHeight="18" FontWeight="Bold" Text="{Binding Path=Name}"
                 HorizontalAlignment="Left" />
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -213,7 +213,7 @@
                         <TextBlock Text="{Binding Path=NIP}" />
                     </StackPanel>
 
-                    <TextBlock Grid.Column="1" Text="{Binding Path=Telefon}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Path=PhoneNumber}"/>
                 </Grid>
             </StackPanel>
         </Border>
@@ -224,7 +224,7 @@
                 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}},
                 Path=ActualWidth, Converter={StaticResource ListWidthConverter}, ConverterParameter=44}">
             <StackPanel>
-                <TextBlock FontSize="13" LineHeight="18" FontWeight="Bold" Text="{Binding Path=Nazwa}"
+                <TextBlock FontSize="13" LineHeight="18" FontWeight="Bold" Text="{Binding Path=Name}"
                 HorizontalAlignment="Left" />
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -245,10 +245,10 @@
                         </Style>
                     </Grid.Resources>
 
-                    <TextBlock Text="{Binding Path=Ilosc}" />
+                    <TextBlock Text="{Binding Path=Quantity}" />
                     <TextBlock Grid.Column="1" Text="{Binding Path=Jednostka}" />
                     <TextBlock Grid.Column="2" Text="x" />
-                    <TextBlock Grid.Column="3" Text="{Binding Path=CenaBrutto, StringFormat=N2}" />
+                    <TextBlock Grid.Column="3" Text="{Binding Path=PriceBrutto, StringFormat=N2}" />
                     <TextBlock Grid.Column="4" Text="zł" />
                     <TextBlock Grid.Column="5" Text="=" />
                     <TextBlock Grid.Column="6" Text="{Binding Path=WartoscBrutto, StringFormat=N2}" />

@@ -52,22 +52,16 @@ namespace FakturyPro.Services
             }
         }
 
-        public void DeleteClient(ClientDto client)
+        public void DeleteClient(int Id)
         {
-            var clientEntity = new Client
-            {
-                Id = client.Id,
-                Name = client.Name,
-                Adress = client.Adress,
-                City = client.City,
-                PostalCode = client.PostalCode,
-                NIP = client.NIP,
-                Email = client.Email,
-                PhoneNumber = client.PhoneNumber
-            };
 
             using (var context = new FakturyDbContext())
             {
+                var clientEntity = context.Clients.FirstOrDefault(x => x.Id == Id);
+                if (clientEntity == null)
+                {
+                    throw new ArgumentException($"Nie znaleziono klienta o id {Id}");
+                }
                 context.Clients.Remove(clientEntity);
                 context.SaveChanges();
                 return;
@@ -78,13 +72,20 @@ namespace FakturyPro.Services
         {
             using (var context = new FakturyDbContext())
             {
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).Name = client.Name;
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).NIP = client.NIP;
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).Adress = client.Adress;
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).City = client.City;
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).Email = client.Email;
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).PhoneNumber = client.PhoneNumber;
-                context.Clients.FirstOrDefault(x => x.Id == client.Id).PostalCode = client.PostalCode;
+                var clientEntity = context.Clients.FirstOrDefault(x => x.Id == client.Id);
+
+                if (clientEntity == null)
+                {
+                    throw new ArgumentException($"Nie znaleziono dokumentu o id {client.Id}!");
+                }
+
+                clientEntity.Name = client.Name;
+                clientEntity.NIP = client.NIP;
+                clientEntity.Adress = client.Adress;
+                clientEntity.City = client.City;
+                clientEntity.Email = client.Email;
+                clientEntity.PhoneNumber = client.PhoneNumber;
+                clientEntity.PostalCode = client.PostalCode;
                 context.SaveChanges();
                 return;
             }
