@@ -31,18 +31,20 @@ namespace FakturyPro.Szablony
         private IProductsService productsService;
         private IDocumentsService documentsService;
         private List<ProductDto> magazynTowarow;
+
         public Magazyn()
         {
             productsService = new ProductsService();
             documentsService = new DocumentsService();
-            
+
             magazynTowarow = productsService.GetProducts();
             InitializeComponent();
             SearchBoxName.Focus();
-    }
+        }
+
 
         public List<ProductDto> MagazynTowarow => magazynTowarow;
-        
+
 
         private ObservableCollection<ProductDto> wybraneElementy = new ObservableCollection<ProductDto>();
 
@@ -50,14 +52,14 @@ namespace FakturyPro.Szablony
         {
             get { return wybraneElementy; }
         }
-        
+
         private void AddToList(object sender, ExecutedRoutedEventArgs e)
         {
-            Storyboard sb = (Storyboard)FindResource("ArrowStoryboard");
+            Storyboard sb = (Storyboard) FindResource("ArrowStoryboard");
             sb.Begin();
             foreach (ProductDto magazineProduct in StorageListBox.SelectedItems)
             {
-                int vat = (int)magazineProduct.VatRate;
+                int vat = (int) magazineProduct.VatRate;
                 int index = WybraneElementy.IndexOf(magazineProduct);
                 if (index == -1)
                 {
@@ -74,7 +76,7 @@ namespace FakturyPro.Szablony
 
         private void RemoveFromList(object sender, ExecutedRoutedEventArgs e)
         {
-            Storyboard sb = (Storyboard)FindResource("ArrowReverseStoryboard");
+            Storyboard sb = (Storyboard) FindResource("ArrowReverseStoryboard");
             sb.Begin();
 
             List<ProductDto> lista = new List<ProductDto>();
@@ -82,6 +84,7 @@ namespace FakturyPro.Szablony
             {
                 lista.Add(product);
             }
+
             foreach (ProductDto product in lista)
             {
                 wybraneElementy.Remove(product);
@@ -93,18 +96,20 @@ namespace FakturyPro.Szablony
         private void Remove(object sender, ExecutedRoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć ten towar?",
-                "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 List<ProductDto> lista = new List<ProductDto>();
                 foreach (ProductDto product in StorageListBox.SelectedItems)
                 {
                     lista.Add(product);
                 }
+
                 foreach (ProductDto product in lista)
                 {
                     magazynTowarow.Remove(product);
                     productsService.DeleteProduct(product.Id);
                 }
+
                 StorageListBox.Items.Refresh();
             }
         }
@@ -117,7 +122,6 @@ namespace FakturyPro.Szablony
                 productsService.UpdateProduct(win.Towar);
                 StorageListBox.Items.Refresh();
             }
-                
         }
 
         private void Add(object sender, ExecutedRoutedEventArgs e)
@@ -129,111 +133,29 @@ namespace FakturyPro.Szablony
                 magazynTowarow.Add(win.Towar);
                 StorageListBox.Items.Refresh();
             }
-
-        }
-
-        private void StworzFakture(object sender, ExecutedRoutedEventArgs e)
-        {
-            DocumentDto fv = new DocumentDto();
-            foreach (ProductDto td in wybraneElementy)
-            {
-                //fv.Add();
-            }
-            
-            AddDocumentWindow win = new AddDocumentWindow();
-
-            if (win.ShowDialog() == true)
-            {
-                fv = win.Dokument as DocumentDto;
-                //fv.Wprowadz();
-                //ListaFaktur.Instance.Add(fv);
-                wybraneElementy.Clear();
-                MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
-                if (mainWindow != null)
-                {
-                    mainWindow.RefreshInvoices();
-                }
-
-                switch (win.WybranaAkcja)
-                {
-                    case AddDocumentWindow.ChosenAction.SavePDF:
-                        // Zapis do PDF
-                        OpenFileDialog myDialog = new OpenFileDialog();
-                        myDialog.Filter =
-                            "PDF (*.PDF)|*.PDF" +
-                            "|All files (*.*)|*.*";
-                        myDialog.CheckFileExists = false;
-                        myDialog.Multiselect = false;
-                        if (myDialog.ShowDialog() == true)
-                        {
-                            //fv.Buduj(new BudowniczyPDF(myDialog.FileName));
-                        }
-                        
-
-                        break;
-                    case AddDocumentWindow.ChosenAction.SavePrint:
-                        // Drukowanie
-                        //fv.Buduj(new BudowniczyDruk());
-                        break;
-                }
-            }
         }
 
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
-            DocumentDto zm = new DocumentDto();
+            DocumentDto zam = new DocumentDto();
+            zam.Type = DocumentType.Order;
             foreach (ProductDto td in wybraneElementy)
             {
-                zam.Products.Add(product);
+                zam.Products.Add(td);
             }
 
-            AddDocumentWindow win = new AddDocumentWindow();
+            AddDocumentWindow win = new AddDocumentWindow(zam);
 
             if (win.ShowDialog() == true)
             {
-                //ListaZamowien.Instance.Add((Zamowienie)win.Dokument);
+                documentsService.AddDocument(zam);
+
                 wybraneElementy.Clear();
                 MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
                 if (mainWindow != null)
                 {
                     mainWindow.RefreshOrders();
                 }
-
-                switch (win.WybranaAkcja)
-                {
-                    case AddDocumentWindow.ChosenAction.SavePDF:
-                        // Zapis do PDF
-                        OpenFileDialog myDialog = new OpenFileDialog();
-                        myDialog.Filter =
-                            "PDF (*.PDF)|*.PDF" +
-                            "|All files (*.*)|*.*";
-                        myDialog.CheckFileExists = false;
-                        myDialog.Multiselect = false;
-                        if (myDialog.ShowDialog() == true)
-                        {
-                            //zm.Buduj(new BudowniczyPDF(myDialog.FileName));
-                        }
-
-
-                        break;
-                    case AddDocumentWindow.ChosenAction.SavePrint:
-                        // Drukowanie
-                        //zm.Buduj(new BudowniczyDruk());
-                        break;
-                }
-            }
-        }
-
-        private void Przyjmij(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (MessageBox.Show("Czy na pewno chcesz przyjąć produkty na stan?",
-                "Czy na pewno?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                foreach (ProductDto td in wybraneElementy)
-                {
-                    //td.WprowadzNaStan();
-                }
-                wybraneElementy.Clear();
             }
         }
 
@@ -242,10 +164,7 @@ namespace FakturyPro.Szablony
             ICollectionView view = CollectionViewSource.GetDefaultView(StorageListBox.ItemsSource);
             if (string.IsNullOrWhiteSpace(SearchBoxName.Text))
             {
-                view.Filter = delegate(object item)
-                {
-                    return true;
-                };
+                view.Filter = delegate(object item) { return true; };
             }
             else
             {
@@ -255,6 +174,7 @@ namespace FakturyPro.Szablony
                     return (tm.Name.ToLower().Contains(SearchBoxName.Text.ToLower()));
                 };
             }
+
             StorageListBox.SelectedIndex = 0;
         }
 
@@ -266,6 +186,7 @@ namespace FakturyPro.Szablony
                 {
                     StorageListBox.SelectedIndex = 1;
                 }
+
                 StorageListBox.Focus();
             }
         }
@@ -306,30 +227,10 @@ namespace FakturyPro.Szablony
         {
             if (e.Action == ValidationErrorEventAction.Added)
             {
-                
                 //MessageBox.Show(e.Error.ErrorContent.ToString());
             }
         }
 
-
-       /* private bool IsValid(DependencyObject obj)
-        {
-            // The dependency object is valid if it has no errors, 
-            // and all of its children (that are dependency objects) are error-free.
-
-            //System.Collections.IEnumerable siema = LogicalTreeHelper.GetChildren(obj)
-            //    .OfType<DependencyObject>();
-            //TextBox tb = obj as TextBox;
-            //if (tb != null)
-            //{
-            //    Console.WriteLine(tb.Text);
-            //}
-
-            return ! Validation.GetHasError(obj) &&
-                LogicalTreeHelper.GetChildren(obj)
-                .OfType<TextBox>()
-                .All(child => IsValid(child));
-        }*/
 
         public bool IsValid(DependencyObject parent)
         {
@@ -340,11 +241,13 @@ namespace FakturyPro.Szablony
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); ++i)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(parent, i);
-                if (!IsValid(child)) { return false; }
+                if (!IsValid(child))
+                {
+                    return false;
+                }
             }
 
             return true;
         }
-
     }
 }

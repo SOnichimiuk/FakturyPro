@@ -159,14 +159,8 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Ilość:" />
-                        <TextBox Width="30" TextAlignment="Right" Text="{Binding Path=Quantity, ValidatesOnDataErrors=True}" Margin="6,0"/>
+                        <TextBox Width="50" TextAlignment="Right" Text="{Binding Path=Quantity, ValidatesOnDataErrors=True}" Margin="6,0"/>
                         <TextBlock Text="szt" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Grid.Column="1">
-                        <TextBlock Text="Cena" />
-                        <TextBox Width="60" TextAlignment="Right" Text="{Binding Path=PriceBrutto, ValidatesOnDataErrors=True, StringFormat=N2}" Margin="6,0" />
-                        <TextBlock Text="zł" />
                     </StackPanel>
                 </Grid>
             </StackPanel>

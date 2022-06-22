@@ -87,25 +87,34 @@ namespace FakturyPro.Services
             {
                 DocumentNr = document.DocumentNr,
                 ClientId = document.ClientId,
-                CreationDate = document.CreationDate,
+                CreationDate = DateTime.Now,
                 State = document.State,
-                SaleDate = document.SaleDate,
+                SaleDate = DateTime.Now,
                 Type = document.Type
             };
 
             using (var context = new FakturyDbContext())
             {
-                var selectedProductsIds = document.Products.Select(x => x.Id);
-
-                var productDocuments = document.Products.Select(x => new ProductDocument
+                var productDocuments = new List<ProductDocument>();
+                foreach (var productDto in document.Products)
                 {
-                    ProductId = x.Id,
-                    Quantity = x.Quantity,
-                }).ToList();
+                    var productEntity = context.Products.SingleOrDefault(x => x.Id == productDto.Id);
+                    
+                    productEntity.Quantity -= productDto.Quantity;
+                    
+                    productDocuments.Add(new ProductDocument
+                    {
+                        ProductId = productDto.Id,
+                        Quantity = productDto.Quantity
+                    });
+                }
 
                 documentEntity.ProductDocuments = productDocuments;
                 
                 context.Documents.Add(documentEntity);
+                context.SaveChanges();
+
+                documentEntity.DocumentNr = $"ZAM/{documentEntity.Id}";
                 context.SaveChanges();
             }
         }

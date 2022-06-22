@@ -105,6 +105,7 @@ namespace FakturyPro.Szablony
                 listaZamowien.Remove(doc);
 
                 doc.Type = DocumentType.Invoice;
+                doc.DocumentNr = $"ZW/{doc.Id}";
                 
                 documentsService.UpdateDocument(doc);
                 

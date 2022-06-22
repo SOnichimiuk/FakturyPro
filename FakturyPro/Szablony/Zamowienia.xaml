@@ -137,7 +137,7 @@
                     </Style>
                 </StackPanel.Resources>
                 <Button Command="app:ListCommands.Remove">x Usuń</Button>
-                <!--Button Command="app:DocumentCommands.Faktura" ToolTip="Wystaw fakturę na podstawie zamówienia">+ Faktura</Button-->
+                <Button Command="app:DocumentCommands.Faktura" ToolTip="Wystaw fakturę na podstawie zamówienia">+ Faktura</Button>
                 <!--Button Command="app:DocumentCommands.SaveAsPDF">Zapisz jako PDF</Button-->
                 <!--Button Command="app:DocumentCommands.Print">Drukuj</Button-->
                 <!--<Button Margin="10,0,0,0">\ Edytuj</Button>-->

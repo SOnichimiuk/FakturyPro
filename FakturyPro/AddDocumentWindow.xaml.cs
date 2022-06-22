@@ -25,11 +25,12 @@ namespace FakturyPro
     {
         private IClientsService clientsService;
         private List<ClientDto> klienci;
-        public AddDocumentWindow()
+        
+        public AddDocumentWindow(DocumentDto doc)
         {
             clientsService = new ClientsService();
             klienci = clientsService.GetClients();
-            //dokument = doc;
+            dokument = doc;
             InitializeComponent();
             CustomersListBox.SelectedIndex = 0;
             SearchBoxName.Focus();
@@ -68,7 +69,6 @@ namespace FakturyPro
             }
             var client = CustomersListBox.SelectedItem as ClientDto;
             dokument.ClientId = client.Id;
-            dokument.ClientName = client.Name;
 
             DialogResult = true;
             Close();
