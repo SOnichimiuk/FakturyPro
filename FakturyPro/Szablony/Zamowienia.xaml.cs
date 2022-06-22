@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -15,40 +16,78 @@ using FakturyPro.Klasy;
 using Microsoft.Win32;
 using FakturyPro.Konwertery;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using FakturyPro.Data.Dto;
+using FakturyPro.Interfaces;
+using FakturyPro.Services;
 
 namespace FakturyPro.Szablony
 {
     /// <summary>
     /// Interaction logic for Zamowienia.xaml
     /// </summary>
-    public partial class Zamowienia : UserControl
+    public partial class Zamowienia : UserControl, INotifyPropertyChanged
     {
+        private IDocumentsService documentsService;
+        private ObservableCollection<DocumentDto> listaZamowien;
+
+        public ObservableCollection<DocumentDto> ListaZamowien
+        {
+            get
+            {
+                return listaZamowien;
+            }
+            set
+            {
+                listaZamowien = value;
+                OnPropertyChanged("ListaZamowien");
+            }
+        }
+
         public Zamowienia()
         {
+            documentsService = new DocumentsService();
+            DownloadItems();
+            
             InitializeComponent();
 
             ICollectionView view = CollectionViewSource.GetDefaultView(OrdersListBox.ItemsSource);
-            view.SortDescriptions.Add(new SortDescription("DataWystawienia", ListSortDirection.Descending));
-            view.GroupDescriptions.Add(new PropertyGroupDescription("DataWystawienia", new DocumentsByMonthsGrouper()));
+            view.SortDescriptions.Add(new SortDescription("CreationDate", ListSortDirection.Descending));
+            view.GroupDescriptions.Add(new PropertyGroupDescription("CreationDate", new DocumentsByMonthsGrouper()));
 
             OrdersListBox.SelectedIndex = 0;
             SearchBoxName.Focus();
         }
 
-        private ListaZamowien zamowienia = ListaZamowien.Instance;
-
-        public ListaZamowien ListaDokumentow
+        public void DownloadItems()
         {
-            get { return zamowienia; }
+            ListaZamowien = new ObservableCollection<DocumentDto>(documentsService.GetOrders());
         }
+        
+        public string ClientName { get; set; }
+        public string DocumentNr { get; set; }
+        
+        private bool Filter(object item)
+        {
+            if (string.IsNullOrEmpty(ClientName) && string.IsNullOrEmpty(DocumentNr))
+            {
+                return true;
+            }
 
+            DocumentDto document = item as DocumentDto;
+            
+            return (string.IsNullOrEmpty(ClientName) || document.ClientName.ToLower().Contains(ClientName.ToLower()))
+                   && (string.IsNullOrEmpty(DocumentNr) || document.DocumentNr.ToLower().Contains(DocumentNr.ToLower()));
+        }
+        
         private void Remove(object sender, ExecutedRoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć ten element?", "Czy na pewno?",
                 MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                zamowienia.Remove(OrdersListBox.SelectedItem as Zamowienie);
-                OrdersListBox.Items.Refresh();
+                DocumentDto document = OrdersListBox.SelectedItem as DocumentDto;
+                listaZamowien.Remove(document);
+                documentsService.DeleteDocument(document.Id);
             }
         }
 
@@ -62,22 +101,21 @@ namespace FakturyPro.Szablony
             if (MessageBox.Show("Czy na pewno chcesz stworzyć fakturę na podstawie zamówienia?", "Czy na pewno?",
                 MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                Zamowienie z = OrdersListBox.SelectedItem as Zamowienie;
-                Faktura fv = z.GenerujFakture();
-                fv.Wprowadz();
+                DocumentDto doc = OrdersListBox.SelectedItem as DocumentDto;
+                listaZamowien.Remove(doc);
 
-                ListaFaktur.Instance.Add(fv);
-                zamowienia.Remove(z);
-
-                OrdersListBox.Items.Refresh();
+                doc.Type = DocumentType.Invoice;
+                
+                documentsService.UpdateDocument(doc);
+                
                 (Window.GetWindow(this) as MainWindow).RefreshInvoices();
             }
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            OrdersListBox.Items.Refresh();
-            OrdersListBox.SelectedIndex = 0;
+            CollectionView view = CollectionViewSource.GetDefaultView(OrdersListBox.ItemsSource) as CollectionView;
+            view.Filter = Filter;
         }
 
         private void SearchBox_KeyUp(object sender, KeyEventArgs e)
@@ -132,13 +170,19 @@ namespace FakturyPro.Szablony
 
             if ("Months".Equals(selected.Tag as string))
             {
-                view.GroupDescriptions.Add(new PropertyGroupDescription("DataWystawienia", new DocumentsByMonthsGrouper()));
+                view.GroupDescriptions.Add(new PropertyGroupDescription("CreationDate", new DocumentsByMonthsGrouper()));
             }
             else if ("Customers".Equals(selected.Tag as string))
             {
-                view.GroupDescriptions.Add(new PropertyGroupDescription("Klient.Nazwa"));
+                view.GroupDescriptions.Add(new PropertyGroupDescription("ClientName"));
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

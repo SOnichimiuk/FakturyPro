@@ -13,5 +13,7 @@ namespace FakturyPro.Data.Dto
         public VatRate VatRate { get; set; }
         public double PriceNetto { get; set; }
         public double Quantity { get; set; }
+
+        public double PriceGross => PriceNetto * (double) VatRate;
     }
 }

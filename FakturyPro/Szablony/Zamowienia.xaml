@@ -54,13 +54,13 @@
                     <Label Content="_Klient" Grid.Column="1" Target="{Binding ElementName=SearchBoxName}"
                            FontSize="10" Foreground="DarkGreen" Margin="0" Padding="0,1,0,3" />
                     <TextBox Name="SearchBoxName" Grid.Column="1" Grid.Row="1" MinWidth="150" Width="220" Margin="0,0,10,0"
-                             Text="{Binding ElementName=FakturyUserControl, Path=ListaDokumentow.Klient, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding ElementName=ZamowieniaUserControl, Path=ClientName, UpdateSourceTrigger=PropertyChanged}"
                              TextChanged="SearchBox_TextChanged" KeyUp="SearchBox_KeyUp" />
 
                     <Label Content="_Nr dokumentu" Grid.Column="2" Target="{Binding ElementName=SearchBoxNumber}"
                            FontSize="10" Foreground="DarkGreen" Margin="0" Padding="0,1,0,3" />
                     <TextBox Name="SearchBoxNumber" Grid.Column="2" Grid.Row="1" MinWidth="120" Margin="0,0,10,0"
-                             Text="{Binding ElementName=FakturyUserControl, Path=ListaDokumentow.NrDokumentu, UpdateSourceTrigger=PropertyChanged}"
+                             Text="{Binding ElementName=ZamowieniaUserControl, Path=DocumentNr, UpdateSourceTrigger=PropertyChanged}"
                              TextChanged="SearchBox_TextChanged" KeyUp="SearchBox_KeyUp" />
 
                     <Label Content="Esc" Grid.Column="3" FontSize="10" Foreground="DarkGreen" Margin="0" Padding="0,1,0,3" />
@@ -94,7 +94,7 @@
         </StackPanel>
 
         <!-- ListBox -->
-        <ListBox Grid.Row="1" Name="OrdersListBox" ItemsSource="{Binding Path=ListaDokumentow, ElementName=ZamowieniaUserControl}"
+        <ListBox Grid.Row="1" Name="OrdersListBox" ItemsSource="{Binding Path=ListaZamowien, ElementName=ZamowieniaUserControl}"
                 ItemTemplate="{StaticResource DocumentsListBoxItemTemplate}" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
                 Style="{StaticResource ListBoxWithClearScrollBar}">
             <ListBox.GroupStyle>

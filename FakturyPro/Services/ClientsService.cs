@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FakturyPro.Interfaces;
 
 namespace FakturyPro.Services
 {
-    public class ClientsService
+    public class ClientsService : IClientsService
     {
         public ClientsService() { }
 

@@ -89,6 +89,9 @@
     <Compile Include="Data\Models\Document.cs" />
     <Compile Include="Data\Models\Client.cs" />
     <Compile Include="Data\Models\Product.cs" />
+    <Compile Include="Interfaces\IClientService.cs" />
+    <Compile Include="Interfaces\IDocumentsService.cs" />
+    <Compile Include="Interfaces\IProductsService.cs" />
     <Compile Include="Klasy\ListaFaktur.cs" />
     <Compile Include="Klasy\ListaKlientow.cs" />
     <Compile Include="Klasy\ListaZamowien.cs" />

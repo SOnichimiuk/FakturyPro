@@ -4,12 +4,11 @@ using FakturyPro.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FakturyPro.Interfaces;
 
 namespace FakturyPro.Services
 {
-    public class DocumentsService
+    public class DocumentsService : IDocumentsService
     {
         public DocumentsService() { }
         
@@ -39,10 +38,19 @@ namespace FakturyPro.Services
                     Id = x.Id,
                     DocumentNr = x.DocumentNr,
                     ClientId = x.ClientId,
+                    ClientName = x.Client.Name, 
                     CreationDate = x.CreationDate,
                     State = x.State,
                     SaleDate = x.SaleDate,
-                    Type = x.Type
+                    Type = x.Type,
+                    Products = x.Products.Select(p => new ProductDto
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Quantity = p.Quantity,
+                        PriceNetto = p.PriceNetto,
+                        VatRate = p.VatRate
+                    }).ToList()
                 }).Where(x => x.Type == DocumentType.Order).ToList();
             }
         }
@@ -56,10 +64,19 @@ namespace FakturyPro.Services
                     Id = x.Id,
                     DocumentNr = x.DocumentNr,
                     ClientId = x.ClientId,
+                    ClientName = x.Client.Name, 
                     CreationDate = x.CreationDate,
                     State = x.State,
                     SaleDate = x.SaleDate,
-                    Type = x.Type
+                    Type = x.Type,
+                    Products = x.Products.Select(p => new ProductDto
+                    {
+                        Id = p.Id,
+                        Name = p.Name,
+                        Quantity = p.Quantity,
+                        PriceNetto = p.PriceNetto,
+                        VatRate = p.VatRate
+                    }).ToList()
                 }).Where(x => x.Type == DocumentType.Invoice).ToList();
             }
         }
@@ -84,24 +101,19 @@ namespace FakturyPro.Services
             }
         }
 
-        public void DeleteDocument(DocumentDto document)
+        public void DeleteDocument(int id)
         {
-            var documentEntity = new Document
-            {
-                Id = document.Id,
-                DocumentNr = document.DocumentNr,
-                ClientId = document.ClientId,
-                CreationDate = document.CreationDate,
-                State = document.State,
-                SaleDate = document.SaleDate,
-                Type = document.Type
-            };
-
             using (var context = new FakturyDbContext())
             {
+                var documentEntity = context.Documents.FirstOrDefault(x => x.Id == id);
+                
+                if (documentEntity == null)
+                {
+                    throw new ArgumentException($"Nie znaleziono dokumentu o id {id}!");
+                }
+                
                 context.Documents.Remove(documentEntity);
                 context.SaveChanges();
-                return;
             }
         }
 

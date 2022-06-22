@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FakturyPro.Data.Dto;
 using FakturyPro.Klasy;
 
 namespace FakturyPro
@@ -27,14 +28,14 @@ namespace FakturyPro
 
         public void RefreshOrders()
         {
-            ZamowieniaTab.OrdersListBox.Items.Refresh();
+            ZamowieniaTab.DownloadItems();
         }
 
         public void RefreshInvoices()
         {
-            FakturyTab.InvoicesListBox.Items.Refresh();
+            FakturyTab.DownloadItems();
         }
-
+        
 
 
         private void ExitApplication(object sender, ExecutedRoutedEventArgs e)
