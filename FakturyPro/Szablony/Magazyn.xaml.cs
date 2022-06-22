@@ -133,19 +133,19 @@ namespace FakturyPro.Szablony
 
         private void StworzFakture(object sender, ExecutedRoutedEventArgs e)
         {
-            Faktura fv = new Faktura();
+            DocumentDto fv = new DocumentDto();
             foreach (ProductDto td in wybraneElementy)
             {
                 //fv.Add();
             }
             
-            AddDocumentWindow win = new AddDocumentWindow(fv);
+            AddDocumentWindow win = new AddDocumentWindow();
 
             if (win.ShowDialog() == true)
             {
-                fv = win.Dokument as Faktura;
-                fv.Wprowadz();
-                ListaFaktur.Instance.Add(fv);
+                fv = win.Dokument as DocumentDto;
+                //fv.Wprowadz();
+                //ListaFaktur.Instance.Add(fv);
                 wybraneElementy.Clear();
                 MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
                 if (mainWindow != null)
@@ -165,14 +165,14 @@ namespace FakturyPro.Szablony
                         myDialog.Multiselect = false;
                         if (myDialog.ShowDialog() == true)
                         {
-                            fv.Buduj(new BudowniczyPDF(myDialog.FileName));
+                            //fv.Buduj(new BudowniczyPDF(myDialog.FileName));
                         }
                         
 
                         break;
                     case AddDocumentWindow.ChosenAction.SavePrint:
                         // Drukowanie
-                        fv.Buduj(new BudowniczyDruk());
+                        //fv.Buduj(new BudowniczyDruk());
                         break;
                 }
             }
@@ -186,11 +186,11 @@ namespace FakturyPro.Szablony
                 //zm.Add(td);
             }
 
-            AddDocumentWindow win = new AddDocumentWindow(zm);
+            AddDocumentWindow win = new AddDocumentWindow();
 
             if (win.ShowDialog() == true)
             {
-                ListaZamowien.Instance.Add((Zamowienie)win.Dokument);
+                //ListaZamowien.Instance.Add((Zamowienie)win.Dokument);
                 wybraneElementy.Clear();
                 MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
                 if (mainWindow != null)

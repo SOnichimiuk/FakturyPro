@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FakturyPro.Klasy;
 using System.ComponentModel;
+using FakturyPro.Interfaces;
+using FakturyPro.Data.Dto;
+using FakturyPro.Services;
 
 namespace FakturyPro
 {
@@ -20,13 +23,19 @@ namespace FakturyPro
     /// </summary>
     public partial class AddDocumentWindow : Window
     {
-        public AddDocumentWindow(Dokument doc)
+        private IClientsService clientsService;
+        private List<ClientDto> klienci;
+        public AddDocumentWindow()
         {
-            dokument = doc;
+            clientsService = new ClientsService();
+            klienci = clientsService.GetClients();
+            //dokument = doc;
             InitializeComponent();
             CustomersListBox.SelectedIndex = 0;
             SearchBoxName.Focus();
         }
+
+        public List<ClientDto> Klienci => klienci;
 
         private ChosenAction akcja;
 
@@ -35,16 +44,10 @@ namespace FakturyPro
             get { return akcja; }
         }
 
-        private ListaKlientow listaKontrahentow = ListaKlientow.Instance;
 
-        public ListaKlientow ListaKontrahentow
-        {
-            get { return listaKontrahentow; }
-        }
+        private DocumentDto dokument = new DocumentDto();
 
-        private Dokument dokument;
-
-        public Dokument Dokument
+        public DocumentDto Dokument
         {
             get { return dokument; }
         }
@@ -63,8 +66,9 @@ namespace FakturyPro
             {
                 akcja = ChosenAction.SavePrint;
             }
-
-            dokument.Klient = CustomersListBox.SelectedItem as Kontrahent;
+            var client = CustomersListBox.SelectedItem as ClientDto;
+            dokument.ClientId = client.Id;
+            dokument.ClientName = client.Name;
 
             DialogResult = true;
             Close();
@@ -131,8 +135,8 @@ namespace FakturyPro
             {
                 view.Filter = delegate(object item)
                 {
-                    Kontrahent klient = item as Kontrahent;
-                    return (klient.Nazwa.ToLower().Contains(SearchBoxName.Text.ToLower()) && klient.NIP.Contains(SearchBoxNIP.Text));
+                    ClientDto klient = item as ClientDto;
+                    return (klient.Name.ToLower().Contains(SearchBoxName.Text.ToLower()) && klient.NIP.Contains(SearchBoxNIP.Text));
                 };
             }
             CustomersListBox.SelectedIndex = 0;
