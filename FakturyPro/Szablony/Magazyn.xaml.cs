@@ -132,6 +132,53 @@ namespace FakturyPro.Szablony
 
         }
 
+        private void StworzFakture(object sender, ExecutedRoutedEventArgs e)
+        {
+            DocumentDto fv = new DocumentDto();
+            foreach (ProductDto td in wybraneElementy)
+            {
+                //fv.Add();
+            }
+            
+            AddDocumentWindow win = new AddDocumentWindow();
+
+            if (win.ShowDialog() == true)
+            {
+                fv = win.Dokument as DocumentDto;
+                //fv.Wprowadz();
+                //ListaFaktur.Instance.Add(fv);
+                wybraneElementy.Clear();
+                MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.RefreshInvoices();
+                }
+
+                switch (win.WybranaAkcja)
+                {
+                    case AddDocumentWindow.ChosenAction.SavePDF:
+                        // Zapis do PDF
+                        OpenFileDialog myDialog = new OpenFileDialog();
+                        myDialog.Filter =
+                            "PDF (*.PDF)|*.PDF" +
+                            "|All files (*.*)|*.*";
+                        myDialog.CheckFileExists = false;
+                        myDialog.Multiselect = false;
+                        if (myDialog.ShowDialog() == true)
+                        {
+                            //fv.Buduj(new BudowniczyPDF(myDialog.FileName));
+                        }
+                        
+
+                        break;
+                    case AddDocumentWindow.ChosenAction.SavePrint:
+                        // Drukowanie
+                        //fv.Buduj(new BudowniczyDruk());
+                        break;
+                }
+            }
+        }
+
         private void StworzZamowienie(object sender, ExecutedRoutedEventArgs e)
         {
             DocumentDto zam = new DocumentDto();
@@ -140,11 +187,11 @@ namespace FakturyPro.Szablony
                 zam.Products.Add(product);
             }
 
-            AddDocumentWindow win = new AddDocumentWindow(zam);
+            AddDocumentWindow win = new AddDocumentWindow();
 
             if (win.ShowDialog() == true)
             {
-                documentsService.AddDocument(win.Dokument);
+                //ListaZamowien.Instance.Add((Zamowienie)win.Dokument);
                 wybraneElementy.Clear();
                 MainWindow mainWindow = Window.GetWindow(this) as MainWindow;
                 if (mainWindow != null)

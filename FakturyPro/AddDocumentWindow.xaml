@@ -62,7 +62,7 @@
             </Grid>
         </Border>
 
-        <ListBox Grid.Row="2" Grid.ColumnSpan="3" Name="CustomersListBox" ItemsSource="{Binding Path=ListaKontrahentow, ElementName=AddDocumentWin}"
+        <ListBox Grid.Row="2" Grid.ColumnSpan="3" Name="CustomersListBox" ItemsSource="{Binding Path=Klienci, ElementName=AddDocumentWin}"
             ItemTemplate="{StaticResource CustomerTemplate}" ItemContainerStyle="{StaticResource ListBoxItemStyle}"
             Style="{StaticResource ListBoxWithClearScrollBar}"/>
         <!--<ListBox Grid.Row="0" Grid.Column="2" Name="SelectedProductsListBox" ItemsSource="{Binding Path=Dokument, ElementName=AddDocumentWin}"
