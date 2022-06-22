@@ -25,7 +25,7 @@ namespace FakturyPro.Szablony
     public partial class Kontrahenci : UserControl
     {
         private IClientsService clientsService;
-        public List<ClientDto> klienci;
+        private List<ClientDto> klienci;
         public Kontrahenci()
         {
             clientsService = new ClientsService();
@@ -34,6 +34,7 @@ namespace FakturyPro.Szablony
             CustomersListBox.SelectedIndex = 0;
         }
 
+        public List<ClientDto> Klienci => klienci;
         private void Remove(object sender, ExecutedRoutedEventArgs e)
         {
             if (MessageBox.Show("Czy na pewno chcesz usunąć ten element?", "Czy na pewno?",
