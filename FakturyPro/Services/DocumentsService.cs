@@ -109,14 +109,21 @@ namespace FakturyPro.Services
         {
             using (var context = new FakturyDbContext())
             {
-                context.Documents.FirstOrDefault(x => x.Id == document.Id).DocumentNr = document.DocumentNr;
-                context.Documents.FirstOrDefault(x => x.Id == document.Id).ClientId = document.ClientId;
-                context.Documents.FirstOrDefault(x => x.Id == document.Id).CreationDate = document.CreationDate;
-                context.Documents.FirstOrDefault(x => x.Id == document.Id).State = document.State;
-                context.Documents.FirstOrDefault(x => x.Id == document.Id).SaleDate = document.SaleDate;
-                context.Documents.FirstOrDefault(x => x.Id == document.Id).Type = document.Type;
+                var documentEntity = context.Documents.FirstOrDefault(x => x.Id == document.Id);
+
+                if (documentEntity == null)
+                {
+                    throw new ArgumentException($"Nie znaleziono dokumentu o id {document.Id}!");
+                }
+                
+                documentEntity.DocumentNr = document.DocumentNr;
+                documentEntity.ClientId = document.ClientId;
+                documentEntity.CreationDate = document.CreationDate;
+                documentEntity.State = document.State;
+                documentEntity.SaleDate = document.SaleDate;
+                documentEntity.Type = document.Type;
+                
                 context.SaveChanges();
-                return;
             }
         }
     }
