@@ -7,7 +7,7 @@ namespace FakturyPro.Interfaces
     {
         List<ProductDto> GetProducts();
         void AddProduct(ProductDto product);
-        void DeleteProduct(ProductDto product);
+        void DeleteProduct(int productId);
         void UpdateProduct(ProductDto product);
     }
 }

@@ -15,6 +15,7 @@ using FakturyPro.Klasy;
 using System.ComponentModel;
 using FakturyPro.Services;
 using FakturyPro.Data.Dto;
+using FakturyPro.Interfaces;
 
 namespace FakturyPro.Szablony
 {
@@ -23,7 +24,7 @@ namespace FakturyPro.Szablony
     /// </summary>
     public partial class Kontrahenci : UserControl
     {
-        private ClientsService clientsService;
+        private IClientsService clientsService;
         public List<ClientDto> klienci;
         public Kontrahenci()
         {

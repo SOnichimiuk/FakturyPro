@@ -7,7 +7,7 @@ namespace FakturyPro.Interfaces
     {
         List<ClientDto> GetClients();
         void AddClient(ClientDto client);
-        void DeleteClient(ClientDto client);
+        void DeleteClient(int clientId);
         void UpdateClient(ClientDto client);
     }
 }

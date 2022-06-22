@@ -19,6 +19,7 @@ using System.ComponentModel;
 using FakturyPro.Data.Models;
 using FakturyPro.Services;
 using FakturyPro.Data.Dto;
+using FakturyPro.Interfaces;
 
 namespace FakturyPro.Szablony
 {
@@ -27,7 +28,7 @@ namespace FakturyPro.Szablony
     /// </summary>
     public partial class Magazyn : UserControl
     {
-        private ProductsService productsService;
+        private IProductsService productsService;
         private List<ProductDto> magazynTowarow;
         public Magazyn()
         {
